@@ -9,6 +9,7 @@ import { LoggerMiddleware } from './middlewares';
 import { PostFavoriteModule } from './modules/post-favorite/post-favorite.module';
 import { CommentModule } from './modules/comment/comment.module';
 import { CommentFavoriteModule } from './modules/comment-favorite/comment-favorite.module';
+import { TagModule } from './modules/tag/tag.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CommentFavoriteModule } from './modules/comment-favorite/comment-favori
     PostFavoriteModule,
     CommentModule,
     CommentFavoriteModule,
+    TagModule,
   ],
   providers: [Logger],
 })

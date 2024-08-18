@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsArray, IsOptional, IsString } from 'class-validator';
 
 export class CreatePostRequestDto {
   @IsString()
@@ -10,6 +10,9 @@ export class CreatePostRequestDto {
 
   @IsString()
   content: string;
+
+  @IsArray()
+  tags: string[];
 }
 
 export class GetPostListRequestDto {

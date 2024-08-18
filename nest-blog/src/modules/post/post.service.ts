@@ -11,27 +11,43 @@ import {
   PostEntityResponse,
   UpdatePostRequestDto,
 } from '@/http';
+import { TagRepository } from '../tag/tag.repository';
 
 @Injectable()
 export class PostService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly postRepository: PostRepository,
+    private readonly tagRepository: TagRepository,
   ) {}
 
   async createPost(
     body: CreatePostRequestDto,
     userId: string,
   ): Promise<MessageResponse> {
-    const user = await this.userRepository.getUserByUserId(userId);
+    const { title, subTitle, content, tags } = body;
 
+    const user = await this.userRepository.getUserByUserId(userId);
     const newPost = this.postRepository.create({
       user,
-      ...body,
+      title,
+      subTitle,
+      content,
     });
 
     try {
-      await this.postRepository.save(newPost);
+      const savedPost = await this.postRepository.save(newPost);
+
+      // tag를 시간 순으로 저장하기 위해
+      // promise all 사용하지 않음
+      for (const tag of tags) {
+        const newTag = this.tagRepository.create({
+          post: savedPost,
+          content: tag,
+        });
+        await this.tagRepository.save(newTag);
+      }
+
       return { message: '생성 완료' };
     } catch (error) {
       throw new Error('생성 실패');
