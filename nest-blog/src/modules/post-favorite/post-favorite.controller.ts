@@ -1,5 +1,5 @@
 import { JwtAuthGuard } from '@/guards';
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { PostFavoriteService } from './post-favorite.service';
 import { GetUser } from '@/decorators';
 import { MessageResponse, PostFavoriteEntityResponse } from '@/http';
@@ -9,18 +9,18 @@ import { MessageResponse, PostFavoriteEntityResponse } from '@/http';
 export class PostFavoriteController {
   constructor(private readonly postFavoriteService: PostFavoriteService) {}
 
-  @Post('/:postId')
+  @Post('/')
   async updateFavorite(
     @GetUser('id') userId: string,
-    @Param('postId') postId: string,
+    @Query('postId') postId: string,
   ): Promise<MessageResponse> {
     return await this.postFavoriteService.updateFavorite(userId, postId);
   }
 
-  @Get('/:postId')
+  @Get('/')
   async getFavorite(
     @GetUser('id') userId: string,
-    @Param('postId') postId: string,
+    @Query('postId') postId: string,
   ): Promise<PostFavoriteEntityResponse> {
     return await this.postFavoriteService.getFavoriteByUserIdAndPostId(
       userId,
@@ -28,7 +28,7 @@ export class PostFavoriteController {
     );
   }
 
-  @Get()
+  @Get('/list')
   async getFavoriteList(
     @GetUser('id') userId: string,
   ): Promise<PostFavoriteEntityResponse[]> {

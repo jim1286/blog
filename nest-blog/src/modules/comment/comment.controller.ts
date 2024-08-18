@@ -4,8 +4,8 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
+  Query,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -22,21 +22,21 @@ import { GetUser } from '@/decorators';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @Post('/:postId')
+  @Post('/create')
   async createComment(
     @Body(ValidationPipe) body: CreateCommentRequestDto,
     @GetUser('id') userId: string,
-    @Param('postId') postId: string,
+    @Query('postId') postId: string,
   ): Promise<MessageResponse> {
     return await this.commentService.createComment(postId, userId, body);
   }
 
-  @Post('/:postId/:commentId')
+  @Post('/create/reply')
   async createReply(
     @Body(ValidationPipe) body: CreateCommentRequestDto,
     @GetUser('id') userId: string,
-    @Param('postId') postId: string,
-    @Param('commentId') commentId: string,
+    @Query('postId') postId: string,
+    @Query('commentId') commentId: string,
   ): Promise<MessageResponse> {
     return await this.commentService.createReply(
       postId,
@@ -46,28 +46,28 @@ export class CommentController {
     );
   }
 
-  @Get('/:postId')
-  async getPostList(
-    @Param('postId') postId: string,
+  @Get('/list')
+  async getCommentList(
+    @Query('postId') postId: string,
   ): Promise<CommentEntityResponse[]> {
     return await this.commentService.getCommentListByPostId(postId);
   }
 
-  @Delete('/:postId/:commentId')
+  @Delete('/')
   async deleteComment(
     @GetUser('id') userId: string,
-    @Param('postId') postId: string,
-    @Param('commentId') commentId: string,
+    @Query('postId') postId: string,
+    @Query('commentId') commentId: string,
   ): Promise<MessageResponse> {
     return await this.commentService.deleteComment(userId, postId, commentId);
   }
 
-  @Delete('/:postId/:commentId/:replyId')
+  @Delete('/reply')
   async deleteReply(
     @GetUser('id') userId: string,
-    @Param('postId') postId: string,
-    @Param('commentId') commentId: string,
-    @Param('replyId') replyId: string,
+    @Query('postId') postId: string,
+    @Query('commentId') commentId: string,
+    @Query('replyId') replyId: string,
   ): Promise<MessageResponse> {
     return await this.commentService.deleteReply(
       userId,

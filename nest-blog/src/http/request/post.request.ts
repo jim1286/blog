@@ -15,11 +15,6 @@ export class CreatePostRequestDto {
   tags: string[];
 }
 
-export class GetPostListRequestDto {
-  @IsString()
-  userId: string;
-}
-
 export class UpdatePostRequestDto {
   @IsString()
   title: string;

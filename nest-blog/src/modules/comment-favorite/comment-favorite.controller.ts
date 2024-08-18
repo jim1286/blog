@@ -1,5 +1,5 @@
 import { JwtAuthGuard } from '@/guards';
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { CommentFavoriteService } from './comment-favorite.service';
 import { GetUser } from '@/decorators';
 import { CommentFavoriteEntityResponse, MessageResponse } from '@/http';
@@ -11,10 +11,10 @@ export class CommentFavoriteController {
     private readonly commentFavoriteService: CommentFavoriteService,
   ) {}
 
-  @Post('/:commentId')
+  @Post('/')
   async updateCommentFavorite(
     @GetUser('id') userId: string,
-    @Param('commentId') commentId: string,
+    @Query('commentId') commentId: string,
   ): Promise<MessageResponse> {
     return await this.commentFavoriteService.updateCommentFavorite(
       userId,
@@ -22,7 +22,7 @@ export class CommentFavoriteController {
     );
   }
 
-  @Get('/')
+  @Get('/list')
   async getCommentFavoriteList(
     @GetUser('id') userId: string,
   ): Promise<CommentFavoriteEntityResponse[]> {

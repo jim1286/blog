@@ -4,9 +4,9 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Put,
+  Query,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -24,7 +24,7 @@ import {
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Post('/')
+  @Post('/create')
   async createPost(
     @Body(ValidationPipe) body: CreatePostRequestDto,
     @GetUser('id') userId: string,
@@ -32,35 +32,35 @@ export class PostController {
     return await this.postService.createPost(body, userId);
   }
 
-  @Get('/postList')
+  @Get('/list')
   async getPostList(
     @GetUser('id') userId: string,
   ): Promise<PostEntityResponse[]> {
     return await this.postService.getPostListByUserId(userId);
   }
 
-  @Get('/postList/all')
+  @Get('/list/all')
   async getPostListAll(): Promise<PostEntityResponse[]> {
     return await this.postService.getPostListAll();
   }
 
-  @Get('/:postId')
-  async getPost(@Param('postId') postId: string): Promise<PostEntityResponse> {
+  @Get('/')
+  async getPost(@Query('postId') postId: string): Promise<PostEntityResponse> {
     return await this.postService.getPostByPostId(postId);
   }
 
-  @Delete('/:postId')
+  @Delete('/')
   async deletePost(
-    @Param('postId') postId: string,
+    @Query('postId') postId: string,
     @GetUser('id') userId: string,
   ): Promise<MessageResponse> {
     return await this.postService.deletePostByPostId(postId, userId);
   }
 
-  @Put('/:postId')
+  @Put('/')
   async updatePost(
     @Body(ValidationPipe) body: UpdatePostRequestDto,
-    @Param('postId') postId: string,
+    @Query('postId') postId: string,
     @GetUser('id') userId: string,
   ): Promise<MessageResponse> {
     return await this.postService.updatePostByPostId(body, postId, userId);

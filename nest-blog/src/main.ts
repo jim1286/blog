@@ -17,7 +17,7 @@ async function bootstrap() {
 
   console.log(`=================================`);
   console.log(`=========== ENV : ${process.env.NODE_ENV} ===========`);
-  console.log(`🚀 App listening on the port ${process.env.SERVER_PORT}`);
+  console.log(`🚀 app listening on the port ${process.env.SERVER_PORT}`);
   console.log(`=================================`);
 }
 

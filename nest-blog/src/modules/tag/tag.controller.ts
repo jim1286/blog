@@ -1,5 +1,5 @@
 import { JwtAuthGuard } from '@/guards';
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { PostEntityResponse, TagEntityResponse } from '@/http';
 
@@ -8,16 +8,16 @@ import { PostEntityResponse, TagEntityResponse } from '@/http';
 export class TagController {
   constructor(private readonly tagService: TagService) {}
 
-  @Get('/:postId')
+  @Get('/list')
   async getTagList(
-    @Param('postId') postId: string,
+    @Query('postId') postId: string,
   ): Promise<TagEntityResponse[]> {
     return await this.tagService.getTagListByPostId(postId);
   }
 
-  @Get('/2/:tagContent')
+  @Get('/list/post')
   async getPostList(
-    @Param('tagContent') tagContent: string,
+    @Query('tagContent') tagContent: string,
   ): Promise<PostEntityResponse[]> {
     return await this.tagService.getPostListByTagContent(tagContent);
   }
