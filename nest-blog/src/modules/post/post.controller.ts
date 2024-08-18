@@ -18,7 +18,9 @@ import {
   PostEntityResponse,
   UpdatePostRequestDto,
 } from '@/http';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('post')
 @Controller('post')
 @UseGuards(JwtAuthGuard)
 export class PostController {

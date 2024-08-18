@@ -16,7 +16,9 @@ import {
   MessageResponse,
 } from '@/http';
 import { GetUser } from '@/decorators';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('comment')
 @Controller('comment')
 @UseGuards(JwtAuthGuard)
 export class CommentController {

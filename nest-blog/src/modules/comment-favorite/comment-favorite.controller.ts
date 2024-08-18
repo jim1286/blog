@@ -3,7 +3,9 @@ import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { CommentFavoriteService } from './comment-favorite.service';
 import { GetUser } from '@/decorators';
 import { CommentFavoriteEntityResponse, MessageResponse } from '@/http';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('comment-favorite')
 @Controller('comment-favorite')
 @UseGuards(JwtAuthGuard)
 export class CommentFavoriteController {

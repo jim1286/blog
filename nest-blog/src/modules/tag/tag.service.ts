@@ -13,7 +13,6 @@ export class TagService {
   async getPostListByTagContent(
     tagContent: string,
   ): Promise<PostEntityResponse[]> {
-    console.log('tagContent', tagContent);
     return (
       await this.tagRepository.getTagListWithPostByTagContent(tagContent)
     ).map((tag) => tag.post);

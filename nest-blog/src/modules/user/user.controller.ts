@@ -19,7 +19,9 @@ import {
   PostSignUpRequestDto,
   MessageResponse,
 } from '@/http';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
