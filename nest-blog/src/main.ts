@@ -13,6 +13,11 @@ async function bootstrap() {
     logger: WinstonLoggerConfig,
   });
 
+  // 모든 도메인에 대한 CORS 허용
+  app.enableCors({
+    origin: true,
+  });
+
   // Swagger 설정
   const config = new DocumentBuilder()
     .setTitle('My API')
