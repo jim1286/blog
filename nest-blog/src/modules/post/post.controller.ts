@@ -22,11 +22,11 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('post')
 @Controller('post')
-@UseGuards(JwtAuthGuard)
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Post('/create')
+  @UseGuards(JwtAuthGuard)
   async createPost(
     @Body(ValidationPipe) body: CreatePostRequestDto,
     @GetUser('id') userId: string,
@@ -35,6 +35,7 @@ export class PostController {
   }
 
   @Get('/list')
+  @UseGuards(JwtAuthGuard)
   async getPostList(
     @GetUser('id') userId: string,
   ): Promise<PostEntityResponse[]> {
@@ -52,6 +53,7 @@ export class PostController {
   }
 
   @Delete('/')
+  @UseGuards(JwtAuthGuard)
   async deletePost(
     @Query('postId') postId: string,
     @GetUser('id') userId: string,
@@ -60,6 +62,7 @@ export class PostController {
   }
 
   @Put('/')
+  @UseGuards(JwtAuthGuard)
   async updatePost(
     @Body(ValidationPipe) body: UpdatePostRequestDto,
     @Query('postId') postId: string,
