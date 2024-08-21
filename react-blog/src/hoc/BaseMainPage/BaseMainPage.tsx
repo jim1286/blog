@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { Header, Tab } from "./components";
-import { FieldTimeOutlined, LineChartOutlined } from "@ant-design/icons";
 import { Outlet } from "react-router-dom";
+import { IconTimeline, IconTrendingUp } from "@tabler/icons-react";
 
 const tabs = [
-  { key: "/recent", tabName: "최신", icon: <FieldTimeOutlined /> },
-  { key: "/trend", tabName: "트렌드", icon: <LineChartOutlined /> },
+  {
+    key: "/recent",
+    tabName: "최신",
+    icon: <IconTimeline />,
+  },
+  {
+    key: "/trend",
+    tabName: "트렌드",
+    icon: <IconTrendingUp />,
+  },
 ];
 
 const BaseMainPage: React.FC = () => {

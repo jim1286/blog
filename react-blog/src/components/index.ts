@@ -1,2 +1,5 @@
 export * from "./BaseStyle";
-export * from "./IconWrap";
+export * from "./LoginModal";
+export * from "./Input";
+export * from "./InputForm";
+export * from "./ErrorMessage";

@@ -3,6 +3,8 @@ import {
   CreateUserRequest,
   CreateUserResponse,
   GetUserResponse,
+  PostSignInRequest,
+  PostSignInResponse,
 } from "@/http";
 import { axiosInstance } from ".";
 
@@ -20,6 +22,15 @@ export const createUser = async (
 export const getUser = async (): Promise<GetUserResponse> => {
   const uri = `${USER_URI}`;
   const res: ApiResponse = await axiosInstance.get(uri);
+
+  return res.data;
+};
+
+export const postSignIn = async (
+  params: PostSignInRequest
+): Promise<PostSignInResponse> => {
+  const uri = `${USER_URI}/signin`;
+  const res: ApiResponse = await axiosInstance.post(uri, params);
 
   return res.data;
 };

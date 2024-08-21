@@ -21,4 +21,5 @@ const Container = styled.div`
   width: 100vw;
   min-width: 800px;
   height: 100vh;
+  background: ${({ theme }) => theme.bg.surface.secondary};
 `;

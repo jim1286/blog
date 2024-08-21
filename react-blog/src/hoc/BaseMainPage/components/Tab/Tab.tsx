@@ -1,4 +1,4 @@
-import { FlexRow, IconWrap } from "@/components";
+import { FlexRow } from "@/components";
 import { H5 } from "@/theme";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const Tab: React.FC<Props> = ({ tabKey, tabName, icon }) => {
         alignItems="center"
         style={{ display: "flex" }}
       >
-        <IconWrap icon={icon} />
+        {icon}
         {tabName}
       </FlexRow>
       {isCurrentTab && <ActiveTab />}

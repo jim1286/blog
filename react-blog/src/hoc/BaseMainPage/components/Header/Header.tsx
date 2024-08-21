@@ -1,18 +1,26 @@
-import { FlexRow, IconWrap } from "@/components";
+import { FlexRow, LoginModal } from "@/components";
 import { H3 } from "@/theme";
-import { LoginOutlined, SearchOutlined } from "@ant-design/icons";
+import { IconLogin, IconSearch } from "@tabler/icons-react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Container>
       <FlexRow justifyContent="space-between" alignItems="center">
         <H3 style={{ cursor: "pointer" }}>Plog</H3>
         <FlexRow gap={15} height="30px" alignItems="center">
-          <IconWrap icon={<SearchOutlined />} size={20} />
-          <IconWrap icon={<LoginOutlined />} size={20} />
+          <IconSearch size={25} cursor="pointer" />
+          <IconLogin
+            size={25}
+            cursor="pointer"
+            onClick={() => setIsOpen(true)}
+          />
         </FlexRow>
       </FlexRow>
+      <LoginModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </Container>
   );
 };

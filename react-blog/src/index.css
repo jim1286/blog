@@ -1,16 +1,14 @@
 /* 브라우저 기본 스타일 초기화 (CSS Reset) */
 * {
+  box-sizing: border-box;
+  vertical-align: baseline;
   margin: 0;
   padding: 0;
   border: 0;
-  box-sizing: border-box;
-  vertical-align: baseline;
   font-family: Arial, sans-serif; /* 기본 폰트 설정 */
-  background-color: #f8f9fa; /* 배경 색상 */
 }
 
 button {
-  background: none;
   border: none;
   cursor: pointer;
 }

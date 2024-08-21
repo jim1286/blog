@@ -10,6 +10,12 @@ export const useGetUserQuery = () => {
   });
 };
 
+export const usePostSignInMutation = () => {
+  return useMutation({
+    mutationFn: UserService.postSignIn,
+  });
+};
+
 export const useCreateUserMutation = () => {
   return useMutation({
     mutationFn: UserService.createUser,
