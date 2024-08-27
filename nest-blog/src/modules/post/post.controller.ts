@@ -18,7 +18,13 @@ import {
   PostEntityResponse,
   UpdatePostRequestDto,
 } from '@/http';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('post')
 @Controller('post')
@@ -27,6 +33,14 @@ export class PostController {
 
   @Post('/create')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Create a new post' })
+  @ApiBody({ type: CreatePostRequestDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Post successfully created.',
+    type: MessageResponse,
+  })
   async createPost(
     @Body(ValidationPipe) body: CreatePostRequestDto,
     @GetUser('id') userId: string,

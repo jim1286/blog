@@ -39,6 +39,6 @@ const Container = styled.div`
   flex-direction: column;
   height: 400px;
   width: 350px;
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 `;

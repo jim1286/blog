@@ -22,8 +22,10 @@ export const RecentPage: React.FC = () => {
 export default RecentPage;
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
   justify-content: space-between;
-  gap: 30px;
 `;
