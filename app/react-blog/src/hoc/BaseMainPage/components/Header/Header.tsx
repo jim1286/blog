@@ -29,4 +29,5 @@ export default Header;
 
 const Container = styled.div`
   width: 100%;
+  padding: 20px 100px;
 `;

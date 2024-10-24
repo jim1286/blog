@@ -1,10 +1,3 @@
-export interface PostEntityResponse {
-  title: string;
-  subTitle?: string;
-  content: string;
-  userId: string;
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-}
+import { Post } from "@/interface";
+
+export type GetPostListAllResponse = Post[];

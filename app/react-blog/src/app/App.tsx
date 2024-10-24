@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import styled, { DefaultTheme, ThemeProvider } from "styled-components";
+import { DefaultTheme, ThemeProvider } from "styled-components";
 import { theme as CustomTheme } from "@/theme";
 
 function App() {
@@ -7,19 +7,9 @@ function App() {
 
   return (
     <ThemeProvider theme={colorMode}>
-      <Container>
-        <Outlet />
-      </Container>
+      <Outlet />
     </ThemeProvider>
   );
 }
 
 export default App;
-
-const Container = styled.div`
-  overflow-y: scroll;
-  width: 100vw;
-  min-width: 800px;
-  height: 100vh;
-  background: ${({ theme }) => theme.bg.surface.secondary};
-`;

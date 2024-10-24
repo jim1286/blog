@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import { Header, Tab } from "./components";
 import { Outlet } from "react-router-dom";
 import { IconTimeline, IconTrendingUp } from "@tabler/icons-react";
+import { Container, Tabs } from "./styles";
 
 const tabs = [
   {
@@ -37,17 +37,3 @@ const BaseMainPage: React.FC = () => {
 };
 
 export default BaseMainPage;
-
-const Container = styled.div`
-  padding: 20px 15%;
-  width: 100%;
-  height: 100%;
-`;
-
-const Tabs = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 80px;
-  gap: 20px;
-`;
