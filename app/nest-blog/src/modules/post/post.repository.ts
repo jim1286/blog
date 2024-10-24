@@ -13,7 +13,10 @@ export class PostRepository extends Repository<PostEntity> {
     const queryBuilder: SelectQueryBuilder<PostEntity> =
       this.createQueryBuilder('post');
 
-    return await queryBuilder.orderBy('post.createdAt', 'DESC').getMany();
+    return await queryBuilder
+      .leftJoinAndSelect('post.user', 'user')
+      .orderBy('post.createdAt', 'DESC')
+      .getMany();
   }
 
   async getPostByPostId(postId: string) {
@@ -39,6 +42,7 @@ export class PostRepository extends Repository<PostEntity> {
 
     return await queryBuilder
       .where('post.userId = :userId', { userId })
+      .leftJoinAndSelect('post.user', 'user')
       .getMany();
   }
 
