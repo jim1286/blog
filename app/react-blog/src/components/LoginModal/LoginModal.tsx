@@ -71,11 +71,11 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
         <FlexRow width="100%">
           <FlexRow style={{ flex: 1 }} />
           <FlexRow gap={5}>
-            <Button disabled={disableSubmit} onClick={handleLogin}>
-              로그인
-            </Button>
             <Button type="primary" onClick={onClose}>
               취소
+            </Button>
+            <Button disabled={disableSubmit} onClick={handleLogin}>
+              로그인
             </Button>
           </FlexRow>
         </FlexRow>
