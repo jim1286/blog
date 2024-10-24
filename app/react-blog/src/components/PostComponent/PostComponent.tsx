@@ -4,15 +4,17 @@ import {
   Container,
   Content,
   Footer,
-  Length,
+  PostText,
   Thumbnail,
   Title,
+  UserThumbnail,
   Wrap,
 } from "./styles";
 import { Post } from "@/interface";
 import { DateUtil } from "@/utils";
 import { FlexColumn } from "../BaseStyle";
 import { useTheme } from "styled-components";
+import { BSS } from "@/theme";
 
 interface Props {
   post: Post;
@@ -28,17 +30,22 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         <FlexColumn
           gap={5}
           style={{
-            paddingBottom: "5px",
+            padding: "10px 15px",
             borderBottom: `1px solid ${theme.border.tertiary}`,
           }}
         >
           <Title>{post.title}</Title>
           <Content>{post.content}</Content>
-          <Length>{DateUtil.utcToLocalYYYYMMDD(post.createdAt)}</Length>
+          <PostText>{DateUtil.utcToLocalYYYYMMDD(post.createdAt)}</PostText>
         </FlexColumn>
         <Footer>
           <Wrap>
-            <Length>{post.userId}</Length>
+            <UserThumbnail
+              src={post.user.thumbnailUrl}
+              style={{ background: `${post.user.thumbnailUrl || "black"}` }}
+            />
+            <PostText>by</PostText>
+            <BSS>{post.user.userName}</BSS>
           </Wrap>
         </Footer>
       </Body>

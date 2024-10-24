@@ -5,8 +5,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   @media all and (min-width: ${MEDIA_SIZE.MIN_SIZE}px) {
     width: 320px;
-    height: 300px;
-    gap: 15px;
   }
 
   @media all and (min-width: ${MEDIA_SIZE.PHONE_SIZE}px) and (max-width: ${MEDIA_SIZE.MIN_SIZE -
@@ -29,7 +27,6 @@ export const Container = styled.div`
   box-shadow: rgb(0 0 0 / 4%) 0px 4px 16px 0px;
   background: ${({ theme }) => theme.bg.surface.tertiary};
   transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
-  padding: 10px 15px;
   cursor: pointer;
 
   &:hover {
@@ -67,7 +64,6 @@ export const Body = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
 `;
 
 export const Title = styled.div`
@@ -85,6 +81,7 @@ export const Footer = styled.div`
   }
 
   display: flex;
+  padding: 10px 15px;
   align-items: center;
   gap: 15px;
 `;
@@ -94,6 +91,8 @@ export const Content = styled(BSS)`
     display: flex;
     gap: 5px;
   }
+
+  color: ${({ theme }) => theme.text.secondary};
 `;
 
 export const Wrap = styled.div`
@@ -102,6 +101,13 @@ export const Wrap = styled.div`
   gap: 5px;
 `;
 
-export const Length = styled(BSS)`
+export const PostText = styled(BSS)`
   color: ${({ theme }) => theme.text.tertiary};
+`;
+
+export const UserThumbnail = styled.img`
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 50%;
 `;
