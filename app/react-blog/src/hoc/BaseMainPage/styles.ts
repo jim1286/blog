@@ -1,4 +1,4 @@
-import { MEDIA_SIZE } from "@/constants";
+import { MediaBasePadding } from "@/components";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -9,15 +9,10 @@ export const Container = styled.div`
   background: ${({ theme }) => theme.bg.surface.quaternary};
 `;
 
-export const Tabs = styled.div`
+export const Tabs = styled(MediaBasePadding)`
   display: flex;
   align-items: center;
   width: 100%;
   height: 80px;
   gap: 20px;
-  padding: 20px 100px;
-
-  @media all and (max-width: ${MEDIA_SIZE.PHONE_SIZE}px) {
-    padding: 20px 20px;
-  }
 `;

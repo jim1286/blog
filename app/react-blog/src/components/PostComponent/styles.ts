@@ -65,18 +65,11 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-export const Title = styled.div`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: break-all;
-`;
-
 export const Footer = styled.div`
   @media all and (max-width: ${MEDIA_SIZE.PHONE_SIZE}px) {
     flex-direction: column;
     align-items: start;
+    padding: 5px 10px;
     gap: 3px;
   }
 
@@ -86,23 +79,40 @@ export const Footer = styled.div`
   gap: 15px;
 `;
 
-export const Content = styled(BSS)`
+export const ContentWrap = styled.div`
   @media all and (max-width: ${MEDIA_SIZE.PHONE_SIZE}px) {
-    display: flex;
-    gap: 5px;
+    flex-direction: column;
+    align-items: start;
+    padding: 5px 10px;
+    gap: 3px;
   }
 
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid ${({ theme }) => theme.border.tertiary};
+  padding: 10px 15px;
+  gap: 5px;
+`;
+
+export const Title = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+`;
+
+export const Content = styled(BSS)`
   color: ${({ theme }) => theme.text.secondary};
+`;
+
+export const PostText = styled(BSS)`
+  color: ${({ theme }) => theme.text.tertiary};
 `;
 
 export const Wrap = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-`;
-
-export const PostText = styled(BSS)`
-  color: ${({ theme }) => theme.text.tertiary};
 `;
 
 export const UserThumbnail = styled.img`

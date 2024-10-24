@@ -3,6 +3,7 @@ import {
   Body,
   Container,
   Content,
+  ContentWrap,
   Footer,
   PostText,
   Thumbnail,
@@ -12,8 +13,6 @@ import {
 } from "./styles";
 import { Post } from "@/interface";
 import { DateUtil } from "@/utils";
-import { FlexColumn } from "../BaseStyle";
-import { useTheme } from "styled-components";
 import { BSS } from "@/theme";
 
 interface Props {
@@ -21,23 +20,15 @@ interface Props {
 }
 
 const PostComponent: React.FC<Props> = ({ post }) => {
-  const theme = useTheme();
-
   return (
     <Container>
       <Thumbnail />
       <Body>
-        <FlexColumn
-          gap={5}
-          style={{
-            padding: "10px 15px",
-            borderBottom: `1px solid ${theme.border.tertiary}`,
-          }}
-        >
+        <ContentWrap>
           <Title>{post.title}</Title>
           <Content>{post.content}</Content>
           <PostText>{DateUtil.utcToLocalYYYYMMDD(post.createdAt)}</PostText>
-        </FlexColumn>
+        </ContentWrap>
         <Footer>
           <Wrap>
             <UserThumbnail
