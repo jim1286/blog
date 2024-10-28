@@ -1,23 +1,15 @@
-import { RoleType } from "@/interfaces";
+import { RoleType, TokenPayload } from "@/interfaces";
 
 export interface PostSignInRequest {
   userName: string;
   password: string;
 }
 
-export interface PostSignUpRequest {
-  userName: string;
-  password: string;
-}
+export type PostSignUpRequest = PostSignInRequest;
 
-export interface GetUserRequest {
-  id: string;
-  userName: string;
-}
+export type GetUserRequest = TokenPayload;
 
-export interface CreateUserRequest {
-  username: string;
-  password: string;
+export interface CreateUserRequest extends PostSignInRequest {
   name: string;
   role: RoleType;
 }
