@@ -1,4 +1,5 @@
-import { JwtTokens, UserEntityResponse } from "@/interfaces";
+import { JwtTokens } from "@/interfaces";
+import { UserEntityResponse } from "..";
 
 export type CreateUserResponse = UserEntityResponse;
 

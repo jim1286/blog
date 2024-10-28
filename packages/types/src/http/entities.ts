@@ -1,4 +1,4 @@
-import { RoleType } from "./common";
+import { RoleType } from "../interfaces/common";
 
 export interface BaseEntityResponse {
   id: string;
