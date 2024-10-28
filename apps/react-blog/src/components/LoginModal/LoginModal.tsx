@@ -9,6 +9,7 @@ import { TokenService } from "@/service";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/constants";
+import { useKeyDown } from "@/hooks";
 
 interface Props {
   isOpen: boolean;
@@ -25,6 +26,12 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
   } = useLoginForm();
   const postSignIn = usePostSignInMutation();
   const queryClient = useQueryClient();
+
+  useKeyDown(() => {
+    if (!disableSubmit) {
+      handleLogin();
+    }
+  }, ["Enter"]);
 
   const handleLogin = async () => {
     if (!loginInfo.id || !loginInfo.password) {

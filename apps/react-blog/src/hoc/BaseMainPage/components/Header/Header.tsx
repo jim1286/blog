@@ -1,9 +1,10 @@
 import { FlexRow, LoginModal, LogoutModal } from "@/components";
-import { H3 } from "@/theme";
+import { BSS, H3 } from "@/theme";
 import { IconKeyOff, IconLogin } from "@tabler/icons-react";
 import { useState } from "react";
 import { Container } from "./styles";
 import { useGetUserQuery } from "@/queries";
+import { Popover } from "antd";
 
 const Header = () => {
   const getUser = useGetUserQuery();
@@ -15,17 +16,21 @@ const Header = () => {
       <FlexRow justifyContent="space-between" alignItems="center">
         <H3 style={{ cursor: "pointer" }}>Plog</H3>
         {getUser.data ? (
-          <IconKeyOff
-            size={25}
-            cursor="pointer"
-            onClick={() => setLogoutModalOpen(true)}
-          />
+          <Popover content={<BSS>로그아웃</BSS>}>
+            <IconKeyOff
+              size={25}
+              cursor="pointer"
+              onClick={() => setLogoutModalOpen(true)}
+            />
+          </Popover>
         ) : (
-          <IconLogin
-            size={25}
-            cursor="pointer"
-            onClick={() => setLoginModalOpen(true)}
-          />
+          <Popover content={<BSS>로그인</BSS>}>
+            <IconLogin
+              size={25}
+              cursor="pointer"
+              onClick={() => setLoginModalOpen(true)}
+            />
+          </Popover>
         )}
       </FlexRow>
       <LogoutModal
