@@ -6,6 +6,7 @@ import { useLoginForm } from "./hook";
 import { InputForm } from "../InputForm";
 import { usePostSignInMutation } from "@/queries";
 import { TokenService } from "@/service";
+import { toast } from "react-toastify";
 
 interface Props {
   isOpen: boolean;
@@ -13,8 +14,13 @@ interface Props {
 }
 
 const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
-  const { loginInfo, loginValidate, disableSubmit, handleInputChange } =
-    useLoginForm();
+  const {
+    loginInfo,
+    loginValidate,
+    disableSubmit,
+    handleInputChange,
+    resetForm,
+  } = useLoginForm();
   const postSignIn = usePostSignInMutation();
 
   const handleLogin = async () => {
@@ -30,8 +36,13 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
       const res = await postSignIn.mutateAsync(params);
       TokenService.setToken(res);
+      toast.success("로그인 성공");
+      onClose();
     } catch (error) {
       console.log(error);
+      toast.error("로그인 실패");
+    } finally {
+      resetForm();
     }
   };
 

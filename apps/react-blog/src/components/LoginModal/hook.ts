@@ -1,20 +1,20 @@
-import { useCheckInput } from '@/hooks';
-import { LoginFormInfoType, LoginFormValidateType } from '@/interface';
-import { useEffect, useState } from 'react';
+import { useCheckInput } from "@/hooks";
+import { LoginFormInfoType, LoginFormValidateType } from "@blog/types";
+import { useEffect, useState } from "react";
 
 export const useLoginForm = () => {
   const validate = useValidate();
   const [loginInfo, setLoginInfo] = useState<LoginFormInfoType>({
-    id: '',
-    password: '',
+    id: "",
+    password: "",
   });
   const [loginValidate, setLoginValidate] = useState<LoginFormValidateType>({
-    id: 'null',
-    password: 'null',
+    id: "null",
+    password: "null",
   });
 
   const disableSubmit = Object.values(loginValidate).some(
-    (validate) => validate !== 'valid'
+    (validate) => validate !== "valid"
   );
 
   useEffect(() => {
@@ -36,7 +36,24 @@ export const useLoginForm = () => {
     });
   };
 
-  return { loginInfo, loginValidate, disableSubmit, handleInputChange };
+  const resetForm = () => {
+    setLoginInfo({
+      id: "",
+      password: "",
+    });
+    setLoginValidate({
+      id: "null",
+      password: "null",
+    });
+  };
+
+  return {
+    loginInfo,
+    loginValidate,
+    disableSubmit,
+    handleInputChange,
+    resetForm,
+  };
 };
 
 const useValidate = () => {

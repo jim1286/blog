@@ -1,6 +1,6 @@
 import { FlexRow, LoginModal } from "@/components";
 import { H3 } from "@/theme";
-import { IconLogin, IconSearch } from "@tabler/icons-react";
+import { IconLogin } from "@tabler/icons-react";
 import { useState } from "react";
 import { Container } from "./styles";
 
@@ -11,14 +11,7 @@ const Header = () => {
     <Container>
       <FlexRow justifyContent="space-between" alignItems="center">
         <H3 style={{ cursor: "pointer" }}>Plog</H3>
-        <FlexRow gap={15} height="30px" alignItems="center">
-          <IconSearch size={25} cursor="pointer" />
-          <IconLogin
-            size={25}
-            cursor="pointer"
-            onClick={() => setIsOpen(true)}
-          />
-        </FlexRow>
+        <IconLogin size={25} cursor="pointer" onClick={() => setIsOpen(true)} />
       </FlexRow>
       <LoginModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </Container>
