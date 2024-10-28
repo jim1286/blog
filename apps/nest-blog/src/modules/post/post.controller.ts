@@ -14,7 +14,6 @@ import { PostService } from './post.service';
 import { GetUser } from '@/decorators';
 import {
   ApiBearerAuth,
-  ApiBody,
   ApiOperation,
   ApiResponse,
   ApiTags,
@@ -35,11 +34,9 @@ export class PostController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new post' })
-  @ApiBody({ type: CreatePostRequest })
   @ApiResponse({
     status: 201,
     description: 'Post successfully created.',
-    type: MessageResponse,
   })
   async createPost(
     @Body(ValidationPipe) body: CreatePostRequest,

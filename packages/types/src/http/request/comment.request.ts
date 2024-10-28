@@ -1,6 +1,3 @@
-import { IsString } from "class-validator";
-
-export class CreateCommentRequest {
-  @IsString()
+export interface CreateCommentRequest {
   content: string;
 }

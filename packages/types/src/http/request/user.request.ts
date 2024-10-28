@@ -1,27 +1,23 @@
-import { IsString, MaxLength, MinLength } from "class-validator";
+import { RoleType } from "@/interfaces";
 
-export class PostSignInRequest {
-  @IsString()
+export interface PostSignInRequest {
   userName: string;
-
-  @IsString()
   password: string;
 }
 
-export class PostSignUpRequest {
-  @IsString()
-  @MinLength(4)
-  @MaxLength(20)
+export interface PostSignUpRequest {
   userName: string;
-
-  @IsString()
   password: string;
 }
 
-export class GetUserRequest {
-  @IsString()
+export interface GetUserRequest {
   id: string;
-
-  @IsString()
   userName: string;
+}
+
+export interface CreateUserRequest {
+  username: string;
+  password: string;
+  name: string;
+  role: RoleType;
 }

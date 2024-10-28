@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
-    "skipLibCheck": true,
     "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    "emitDeclarationOnly": false,
 
     /* Path */
     "baseUrl": ".",

@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "pnpm -r run build",
-    "build:packages": "pnpm --filter './packages/*' -r run build",
+    "build:types": "pnpm --filter @blog/types run clean && pnpm --filter @blog/types run build",
     "dev": "pnpm -r run dev",
     "test": "pnpm -r run test",
     "lint": "pnpm -r run lint",
