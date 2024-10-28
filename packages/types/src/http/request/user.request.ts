@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsString, MaxLength, MinLength } from "class-validator";
 
 export class PostSignInRequest {
   @IsString()
@@ -8,8 +8,20 @@ export class PostSignInRequest {
   password: string;
 }
 
-export interface CreateUserRequest {
-  username: string;
+export class PostSignUpRequest {
+  @IsString()
+  @MinLength(4)
+  @MaxLength(20)
+  userName: string;
+
+  @IsString()
   password: string;
-  name: string;
+}
+
+export class GetUserRequest {
+  @IsString()
+  id: string;
+
+  @IsString()
+  userName: string;
 }

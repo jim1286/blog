@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PostFavoriteRepository } from './post-favorite.repository';
-import { MessageResponse, PostFavoriteEntityResponse } from '@/http';
 import { UserService } from '../user/user.service';
 import { PostService } from '../post/post.service';
+import { MessageResponse, PostFavoriteEntityResponse } from '@blog/types';
 
 @Injectable()
 export class PostFavoriteService {

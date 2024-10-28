@@ -12,14 +12,14 @@ import { UserService } from './user.service';
 import { GetUser } from '@/decorators';
 import { JwtAuthGuard } from '@/guards';
 import { FileInterceptor } from '@nestjs/platform-express';
-import {
-  UserEntityResponse,
-  PostSignInRequestDto,
-  PostSignInResponse,
-  PostSignUpRequestDto,
-  MessageResponse,
-} from '@/http';
 import { ApiTags } from '@nestjs/swagger';
+import {
+  MessageResponse,
+  PostSignInRequest,
+  PostSignInResponse,
+  PostSignUpRequest,
+  UserEntityResponse,
+} from '@blog/types';
 
 @ApiTags('user')
 @Controller('user')
@@ -28,7 +28,7 @@ export class UserController {
 
   @Post('/signin')
   postSignIn(
-    @Body(ValidationPipe) body: PostSignInRequestDto,
+    @Body(ValidationPipe) body: PostSignInRequest,
   ): Promise<PostSignInResponse> {
     return this.userService.signIn(body);
   }
@@ -36,7 +36,7 @@ export class UserController {
   @Post('/signup')
   @UseInterceptors(FileInterceptor('image'))
   postSignUp(
-    @Body(ValidationPipe) body: PostSignUpRequestDto,
+    @Body(ValidationPipe) body: PostSignUpRequest,
     @UploadedFile() file?: Express.Multer.File,
   ): Promise<MessageResponse> {
     return this.userService.createUser(body, file);

@@ -4,13 +4,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CommentRepository } from './comment.repository';
-import {
-  CommentEntityResponse,
-  CreateCommentRequestDto,
-  MessageResponse,
-} from '@/http';
 import { PostService } from '../post/post.service';
 import { UserService } from '../user/user.service';
+import {
+  CreateCommentRequest,
+  MessageResponse,
+  CommentEntityResponse,
+} from '@blog/types';
 
 @Injectable()
 export class CommentService {
@@ -23,7 +23,7 @@ export class CommentService {
   async createComment(
     postId: string,
     userId: string,
-    body: CreateCommentRequestDto,
+    body: CreateCommentRequest,
   ) {
     const post = await this.postService.getPostByPostId(postId);
     const user = await this.userService.getUserByUserId(userId);
@@ -47,7 +47,7 @@ export class CommentService {
     postId: string,
     userId: string,
     commentId: string,
-    body: CreateCommentRequestDto,
+    body: CreateCommentRequest,
   ) {
     const post = await this.postService.getPostByPostId(postId);
     const user = await this.userService.getUserByUserId(userId);

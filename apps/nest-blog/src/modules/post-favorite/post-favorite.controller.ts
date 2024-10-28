@@ -2,8 +2,8 @@ import { JwtAuthGuard } from '@/guards';
 import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { PostFavoriteService } from './post-favorite.service';
 import { GetUser } from '@/decorators';
-import { MessageResponse, PostFavoriteEntityResponse } from '@/http';
 import { ApiTags } from '@nestjs/swagger';
+import { MessageResponse, PostFavoriteEntityResponse } from '@blog/types';
 
 @ApiTags('post-favorite')
 @Controller('post-favorite')

@@ -1,3 +1,3 @@
-import { Post } from "@/interfaces";
+import { PostEntityResponse } from "@/interfaces";
 
-export type GetPostListAllResponse = Post[];
+export type GetPostListAllResponse = PostEntityResponse[];

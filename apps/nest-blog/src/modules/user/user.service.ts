@@ -4,17 +4,16 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { TokenPayload } from '@/interfaces';
-import * as bcrypt from 'bcrypt';
-import { RoleEnum } from '@/enums';
-import { UserRepository } from './user.repository';
 import {
+  PostSignInRequest,
+  PostSignUpRequest,
+  TokenPayload,
   MessageResponse,
-  PostSignInRequestDto,
   PostSignInResponse,
-  PostSignUpRequestDto,
   UserEntityResponse,
-} from '@/http';
+} from '@blog/types';
+import * as bcrypt from 'bcrypt';
+import { UserRepository } from './user.repository';
 import { JwtStrategy } from '@/strategies';
 import { S3Service } from '../s3/s3.service';
 
@@ -26,7 +25,7 @@ export class UserService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async signIn(body: PostSignInRequestDto): Promise<PostSignInResponse> {
+  async signIn(body: PostSignInRequest): Promise<PostSignInResponse> {
     const { userName, password } = body;
     const user = await this.userRepository.getUserByUsername(userName);
 
@@ -52,7 +51,7 @@ export class UserService {
   }
 
   async createUser(
-    body: PostSignUpRequestDto,
+    body: PostSignUpRequest,
     file?: Express.Multer.File,
   ): Promise<MessageResponse> {
     const { userName, password } = body;
@@ -68,7 +67,7 @@ export class UserService {
     const newUser = this.userRepository.create({
       userName,
       password: hashedPassword,
-      role: RoleEnum.USER,
+      role: 'user',
     });
 
     if (file) {

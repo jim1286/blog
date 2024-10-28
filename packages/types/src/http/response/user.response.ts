@@ -1,7 +1,7 @@
-import { JwtTokens, User } from "@/interfaces";
+import { JwtTokens, UserEntityResponse } from "@/interfaces";
 
-export type CreateUserResponse = User;
+export type CreateUserResponse = UserEntityResponse;
 
 export type PostSignInResponse = JwtTokens;
 
-export type GetUserResponse = User;
+export type GetUserResponse = UserEntityResponse;

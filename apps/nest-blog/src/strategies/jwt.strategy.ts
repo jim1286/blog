@@ -1,4 +1,4 @@
-import { TokenPayload } from '@/interfaces';
+import { TokenPayload } from '@blog/types';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';

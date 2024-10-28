@@ -10,13 +10,13 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
-import {
-  CommentEntityResponse,
-  CreateCommentRequestDto,
-  MessageResponse,
-} from '@/http';
 import { GetUser } from '@/decorators';
 import { ApiTags } from '@nestjs/swagger';
+import {
+  CreateCommentRequest,
+  MessageResponse,
+  CommentEntityResponse,
+} from '@blog/types';
 
 @ApiTags('comment')
 @Controller('comment')
@@ -26,7 +26,7 @@ export class CommentController {
 
   @Post('/create')
   async createComment(
-    @Body(ValidationPipe) body: CreateCommentRequestDto,
+    @Body(ValidationPipe) body: CreateCommentRequest,
     @GetUser('id') userId: string,
     @Query('postId') postId: string,
   ): Promise<MessageResponse> {
@@ -35,7 +35,7 @@ export class CommentController {
 
   @Post('/create/reply')
   async createReply(
-    @Body(ValidationPipe) body: CreateCommentRequestDto,
+    @Body(ValidationPipe) body: CreateCommentRequest,
     @GetUser('id') userId: string,
     @Query('postId') postId: string,
     @Query('commentId') commentId: string,

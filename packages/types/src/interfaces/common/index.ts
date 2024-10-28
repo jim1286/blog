@@ -1,1 +1,1 @@
-export * from "./base.interface";
+export * from "./role.interface";

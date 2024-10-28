@@ -1,5 +1,5 @@
 import { PostEntity } from '@/entities';
-import { UpdatePostRequestDto } from '@/http';
+import { UpdatePostRequest } from '@blog/types';
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository, SelectQueryBuilder } from 'typeorm';
 
@@ -46,7 +46,7 @@ export class PostRepository extends Repository<PostEntity> {
       .getMany();
   }
 
-  async updatePostByPostId(body: UpdatePostRequestDto, postId: string) {
+  async updatePostByPostId(body: UpdatePostRequest, postId: string) {
     const queryBuilder: SelectQueryBuilder<PostEntity> =
       this.createQueryBuilder('post');
 

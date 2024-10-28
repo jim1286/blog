@@ -5,13 +5,13 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UserRepository } from '@/modules/user/user.repository';
+import { TagRepository } from '../tag/tag.repository';
 import {
-  CreatePostRequestDto,
+  CreatePostRequest,
   MessageResponse,
   PostEntityResponse,
-  UpdatePostRequestDto,
-} from '@/http';
-import { TagRepository } from '../tag/tag.repository';
+  UpdatePostRequest,
+} from '@blog/types';
 
 @Injectable()
 export class PostService {
@@ -22,7 +22,7 @@ export class PostService {
   ) {}
 
   async createPost(
-    body: CreatePostRequestDto,
+    body: CreatePostRequest,
     userId: string,
   ): Promise<MessageResponse> {
     const { title, subTitle, content, tags } = body;
@@ -87,7 +87,7 @@ export class PostService {
   }
 
   async updatePostByPostId(
-    body: UpdatePostRequestDto,
+    body: UpdatePostRequest,
     postId: string,
     userId: string,
   ): Promise<MessageResponse> {

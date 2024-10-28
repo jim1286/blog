@@ -13,18 +13,18 @@ import {
 import { PostService } from './post.service';
 import { GetUser } from '@/decorators';
 import {
-  CreatePostRequestDto,
-  MessageResponse,
-  PostEntityResponse,
-  UpdatePostRequestDto,
-} from '@/http';
-import {
   ApiBearerAuth,
   ApiBody,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import {
+  CreatePostRequest,
+  MessageResponse,
+  PostEntityResponse,
+  UpdatePostRequest,
+} from '@blog/types';
 
 @ApiTags('post')
 @Controller('post')
@@ -35,14 +35,14 @@ export class PostController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create a new post' })
-  @ApiBody({ type: CreatePostRequestDto })
+  @ApiBody({ type: CreatePostRequest })
   @ApiResponse({
     status: 201,
     description: 'Post successfully created.',
     type: MessageResponse,
   })
   async createPost(
-    @Body(ValidationPipe) body: CreatePostRequestDto,
+    @Body(ValidationPipe) body: CreatePostRequest,
     @GetUser('id') userId: string,
   ): Promise<MessageResponse> {
     return await this.postService.createPost(body, userId);
@@ -78,7 +78,7 @@ export class PostController {
   @Put('/')
   @UseGuards(JwtAuthGuard)
   async updatePost(
-    @Body(ValidationPipe) body: UpdatePostRequestDto,
+    @Body(ValidationPipe) body: UpdatePostRequest,
     @Query('postId') postId: string,
     @GetUser('id') userId: string,
   ): Promise<MessageResponse> {

@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { TagService } from './tag.service';
-import { PostEntityResponse, TagEntityResponse } from '@/http';
 import { ApiTags } from '@nestjs/swagger';
+import { PostEntityResponse, TagEntityResponse } from '@blog/types';
 
 @ApiTags('tag')
 @Controller('tag')

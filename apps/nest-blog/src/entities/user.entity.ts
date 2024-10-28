@@ -1,4 +1,3 @@
-import { RoleEnum } from '@/enums';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
 import {
   BookmarkEntity,
@@ -9,6 +8,7 @@ import {
 } from '.';
 import { BaseEntity } from './base.entity';
 import { Exclude } from 'class-transformer';
+import { RoleType } from '@blog/types';
 
 @Entity('User')
 @Unique(['userName'])
@@ -24,7 +24,7 @@ export class UserEntity extends BaseEntity {
   thumbnailUrl: string;
 
   @Column()
-  role: RoleEnum;
+  role: RoleType;
 
   @OneToMany(() => PostEntity, (post) => post.user)
   posts: PostEntity[];

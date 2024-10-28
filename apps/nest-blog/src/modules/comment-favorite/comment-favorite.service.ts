@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CommentFavoriteRepository } from './comment-favoirte.repository';
-import { CommentFavoriteEntityResponse, MessageResponse } from '@/http';
 import { UserService } from '../user/user.service';
 import { CommentService } from '../comment/comment.service';
+import { CommentFavoriteEntityResponse, MessageResponse } from '@blog/types';
 
 @Injectable()
 export class CommentFavoriteService {
