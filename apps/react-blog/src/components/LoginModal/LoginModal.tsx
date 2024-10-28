@@ -7,6 +7,8 @@ import { InputForm } from "../InputForm";
 import { usePostSignInMutation } from "@/queries";
 import { TokenService } from "@/service";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEYS } from "@/constants";
 
 interface Props {
   isOpen: boolean;
@@ -22,6 +24,7 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
     resetForm,
   } = useLoginForm();
   const postSignIn = usePostSignInMutation();
+  const queryClient = useQueryClient();
 
   const handleLogin = async () => {
     if (!loginInfo.id || !loginInfo.password) {
@@ -37,6 +40,7 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
       const res = await postSignIn.mutateAsync(params);
       TokenService.setToken(res);
       toast.success("로그인 성공");
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER] });
       onClose();
     } catch (error) {
       console.log(error);

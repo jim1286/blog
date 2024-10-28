@@ -6,3 +6,4 @@ export * from "./ErrorMessage";
 export * from "./PostComponent";
 export * from "./Loading";
 export * from "./NotificationIcon";
+export * from "./LogoutModal";

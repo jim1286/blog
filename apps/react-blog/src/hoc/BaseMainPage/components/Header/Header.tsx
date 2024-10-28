@@ -1,19 +1,41 @@
-import { FlexRow, LoginModal } from "@/components";
+import { FlexRow, LoginModal, LogoutModal } from "@/components";
 import { H3 } from "@/theme";
-import { IconLogin } from "@tabler/icons-react";
+import { IconKeyOff, IconLogin } from "@tabler/icons-react";
 import { useState } from "react";
 import { Container } from "./styles";
+import { useGetUserQuery } from "@/queries";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const getUser = useGetUserQuery();
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 
   return (
     <Container>
       <FlexRow justifyContent="space-between" alignItems="center">
         <H3 style={{ cursor: "pointer" }}>Plog</H3>
-        <IconLogin size={25} cursor="pointer" onClick={() => setIsOpen(true)} />
+        {getUser.data ? (
+          <IconKeyOff
+            size={25}
+            cursor="pointer"
+            onClick={() => setLogoutModalOpen(true)}
+          />
+        ) : (
+          <IconLogin
+            size={25}
+            cursor="pointer"
+            onClick={() => setLoginModalOpen(true)}
+          />
+        )}
       </FlexRow>
-      <LoginModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <LogoutModal
+        isOpen={logoutModalOpen}
+        onClose={() => setLogoutModalOpen(false)}
+      />
+      <LoginModal
+        isOpen={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+      />
     </Container>
   );
 };
