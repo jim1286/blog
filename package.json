@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npm i && npm run install:client && npm run install:server && npm run start:dev",
-    "start:dev": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "install:client": "cd app/react-blog && npm i",
-    "install:server": "cd app/nest-blog && npm i",
-    "start:client": "cd app/react-blog && npm run dev",
-    "start:server": "cd app/nest-blog && npm run dev"
+    "build": "pnpm -r run build",
+    "build:types": "pnpm --filter @blog/types run clean && pnpm --filter @blog/types run build",
+    "dev": "pnpm -r run dev",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint",
+    "clean": "pnpm -r run clean",
+    "type-check": "pnpm -r run type-check"
   },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
-  }
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

@@ -8,9 +8,5 @@
 
 # dotenv environment variable files
 .env
-.env.dev
-.env.prod
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+.env.development
+.env.production
