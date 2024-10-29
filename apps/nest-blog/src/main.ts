@@ -5,11 +5,13 @@ import * as dotenv from 'dotenv';
 import { ClassSerializerInterceptor } from '@nestjs/common';
 import { HttpExceptionFilter } from './filters';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: WinstonLoggerConfig,
   });
 
@@ -25,6 +27,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('MyTag')
     .build();
+
+  // 정적 파일 제공 설정
+  app.useStaticAssets(join('uploads'), {
+    prefix: '/uploads', // URL에서 /uploads 경로로 파일에 접근 가능
+  });
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

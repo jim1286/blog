@@ -20,6 +20,9 @@ import {
   PostSignUpRequest,
   UserEntityResponse,
 } from '@blog/types';
+import { diskStorage } from 'multer';
+import { UtilStrategy } from '@/strategies';
+import { extname } from 'path';
 
 @ApiTags('user')
 @Controller('user')
@@ -34,7 +37,18 @@ export class UserController {
   }
 
   @Post('/signup')
-  @UseInterceptors(FileInterceptor('image'))
+  @UseInterceptors(
+    FileInterceptor('thumbnail', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (_, file, cb) => {
+          const uniqueSuffix = `${new UtilStrategy().getUUID()}${extname(file.originalname)}`;
+          cb(null, uniqueSuffix);
+        },
+      }),
+      limits: { fileSize: 5 * 1024 * 1024 },
+    }),
+  )
   postSignUp(
     @Body(ValidationPipe) body: PostSignUpRequest,
     @UploadedFile() file?: Express.Multer.File,

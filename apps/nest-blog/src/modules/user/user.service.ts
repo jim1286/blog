@@ -15,12 +15,10 @@ import {
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
 import { JwtStrategy } from '@/strategies';
-import { S3Service } from '../s3/s3.service';
 
 @Injectable()
 export class UserService {
   constructor(
-    private readonly s3Service: S3Service,
     private readonly jwtStrategy: JwtStrategy,
     private readonly userRepository: UserRepository,
   ) {}
@@ -72,8 +70,9 @@ export class UserService {
 
     if (file) {
       try {
-        const thumbnailUrl = await this.s3Service.uploadImage(file);
-        newUser.thumbnailUrl = thumbnailUrl.imageUrl;
+        // S3는 추후 연결(서버 비용)
+        // const thumbnailUrl = await this.s3Service.uploadImage(file);
+        newUser.thumbnailUrl = `http://localhost:3000/uploads/${file.filename}`;
       } catch (error) {
         throw new Error('이미지 업로드 실패');
       }

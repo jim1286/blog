@@ -5,7 +5,9 @@ export interface PostSignInRequest {
   password: string;
 }
 
-export type PostSignUpRequest = PostSignInRequest;
+export interface PostSignUpRequest extends PostSignInRequest {
+  thumbnail: File;
+}
 
 export type GetUserRequest = TokenPayload;
 
