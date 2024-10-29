@@ -5,7 +5,8 @@
   "scripts": {
     "build": "pnpm -r run build",
     "build:types": "pnpm --filter @blog/types run clean && pnpm --filter @blog/types run build",
-    "dev": "pnpm -r run dev",
+    "build:packages": "concurrently --kill-others --success=first \"pnpm --filter ./packages/* run build\"",
+    "dev": "concurrently \"pnpm run build:packages\" \"pnpm -r run dev\"",
     "test": "pnpm -r run test",
     "lint": "pnpm -r run lint",
     "clean": "pnpm -r run clean",
@@ -14,5 +15,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
 }
