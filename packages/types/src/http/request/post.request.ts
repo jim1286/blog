@@ -3,10 +3,7 @@ export interface CreatePostRequest {
   subTitle?: string;
   content: string;
   tags: string[];
+  thumbnail?: File;
 }
 
-export interface UpdatePostRequest {
-  title: string;
-  subTitle?: string;
-  content: string;
-}
+export type UpdatePostRequest = CreatePostRequest;

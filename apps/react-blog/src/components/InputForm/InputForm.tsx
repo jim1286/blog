@@ -32,7 +32,7 @@ const InputForm: React.FC<InputFormProps> = ({
   const theme = useTheme();
 
   return (
-    <Container subTitle={subTitle}>
+    <Container subTitle={subTitle} errorMessage={errorMessage}>
       <InputTitle>
         {title}
         {isNecessary && <Label>{"*"}</Label>}

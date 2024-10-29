@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from "@/constants";
 import { TokenService, UserService } from "@/service";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetUserQuery = () => {
   const token = TokenService.getToken();
@@ -15,8 +15,13 @@ export const useGetUserQuery = () => {
 };
 
 export const usePostSignInMutation = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: UserService.postSignIn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER] });
+    },
   });
 };
 

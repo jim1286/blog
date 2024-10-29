@@ -10,7 +10,7 @@ export const InputField = styled.input<InputFieldProps>`
   padding: 0 14px;
   color: ${({ theme }) => theme.text.primary};
   border: ${({ theme }) => `1px solid ${theme.border.tertiary}`};
-  background: ${({ theme }) => theme.bg.fill.primary.rest};
+  background: ${({ theme }) => theme.bg.fill.primary.hover};
   height: ${({ size }) => (size === "md" ? "40px" : "32px")};
 
   &::placeholder {

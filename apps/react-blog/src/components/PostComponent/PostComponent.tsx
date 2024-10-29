@@ -13,16 +13,16 @@ import {
 } from "./styles";
 import { DateUtil } from "@/utils";
 import { BSS } from "@/theme";
-import { Post } from "@blog/types";
+import { PostEntityResponse } from "@blog/types";
 
 interface Props {
-  post: Post;
+  post: PostEntityResponse;
 }
 
 const PostComponent: React.FC<Props> = ({ post }) => {
   return (
     <Container>
-      <Thumbnail />
+      <Thumbnail src={post.thumbNail} />
       <Body>
         <ContentWrap>
           <Title>{post.title}</Title>

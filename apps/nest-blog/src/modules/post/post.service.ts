@@ -24,6 +24,7 @@ export class PostService {
   async createPost(
     body: CreatePostRequest,
     userId: string,
+    file?: Express.Multer.File,
   ): Promise<MessageResponse> {
     const { title, subTitle, content, tags } = body;
 
@@ -34,6 +35,16 @@ export class PostService {
       subTitle,
       content,
     });
+
+    if (file) {
+      try {
+        // S3는 추후 연결(서버 비용)
+        // const thumbnailUrl = await this.s3Service.uploadImage(file);
+        newPost.thumbnailUrl = `http://localhost:3000/uploads/${file.filename}`;
+      } catch (error) {
+        throw new Error('이미지 업로드 실패');
+      }
+    }
 
     try {
       const savedPost = await this.postRepository.save(newPost);

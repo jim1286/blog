@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from "@/constants";
 import { PostService } from "@/service";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useGetUserQuery } from "./useUserQuery";
 
 export const useGetPostListQuery = () => {
@@ -17,5 +17,17 @@ export const useGetPostListAllQuery = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.POST_LIST_ALL],
     queryFn: PostService.getPostListAll,
+  });
+};
+
+export const useCreatePostMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: PostService.createPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POST_LIST] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POST_LIST_ALL] });
+    },
   });
 };

@@ -1,15 +1,17 @@
-import { BMS } from '@/theme';
-import styled from 'styled-components';
+import { BMS } from "@/theme";
+import styled from "styled-components";
 
 interface SubTitleProps {
   subTitle?: string;
+  errorMessage?: string;
 }
 
 export const Container = styled.div<SubTitleProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: ${({ subTitle }) => (subTitle ? '105px' : '90px')};
+  height: ${({ subTitle, errorMessage }) =>
+    !errorMessage ? "auto" : subTitle ? "105px" : "90px"};
 `;
 
 export const InputTitle = styled(BMS)`

@@ -13,7 +13,7 @@ export class BookmarkEntity extends BaseEntity {
   userId: string;
 
   @ManyToOne(() => PostEntity, (post) => post.bookmarks)
-  post: UserEntity;
+  post: PostEntity;
 
   @Column()
   @Exclude()

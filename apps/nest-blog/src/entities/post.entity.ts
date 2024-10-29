@@ -20,6 +20,9 @@ export class PostEntity extends BaseEntity {
   @Column()
   content: string;
 
+  @Column({ nullable: true })
+  thumbnailUrl: string;
+
   @ManyToOne(() => UserEntity, (user) => user.posts)
   user: UserEntity;
 

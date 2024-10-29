@@ -9,6 +9,12 @@ export interface SignUpFormInfoType {
   passwordConfirm: string;
 }
 
+export interface CreatePostFormInfoType {
+  title: string;
+  subTitle: string;
+  content: string;
+}
+
 export interface LoginFormValidateType {
   userName: InputValidType;
   password: InputValidType;
@@ -18,6 +24,12 @@ export interface SignUpFormValidateType {
   userName: InputValidType;
   password: InputValidType;
   passwordConfirm: InputValidType;
+}
+
+export interface CreatePostFormValidateType {
+  title: InputValidType;
+  subTitle: InputValidType;
+  content: InputValidType;
 }
 
 export interface UserFormInfoType {

@@ -8,3 +8,5 @@ export * from "./Loading";
 export * from "./NotificationIcon";
 export * from "./LogoutModal";
 export * from "./SignUpModal";
+export * from "./Tag";
+export * from "./ImageUpload";

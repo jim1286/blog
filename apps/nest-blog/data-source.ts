@@ -10,7 +10,6 @@ export const dataSource = new DataSource({
   port: Number(process.env.DB_PORT), // MySQL의 기본 포트는 3306 입니다.
   database: process.env.DB_NAME,
   username: process.env.DB_USER, // MySQL 설치시 설정한 유저네임을 입력하면 됩니다,
-  password: process.env.DB_PASSWORD, // MySQL 설치시 설정한 비밀번호를 입력하면 뒵니다.,
   // entity는 DB의 테이블을 지칭합니다. 따라서 어떤 테이블이 사용되는지. 테이블에 대한 정보를 가져오는 것.
   entities: [
     // entity는 DB의 테이블을 지칭합니다. 따라서 어떤 테이블이 사용되는지. 테이블에 대한 정보를 가져오는 것.

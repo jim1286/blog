@@ -30,8 +30,8 @@ export interface PostEntityResponse extends BaseEntityResponse {
   title: string;
   subTitle?: string;
   content: string;
-  userId: string;
   user: UserEntityResponse;
+  thumbNail: string;
 }
 
 export interface PostFavoriteEntityResponse extends BaseEntityResponse {

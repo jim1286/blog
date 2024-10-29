@@ -7,8 +7,6 @@ import { InputForm } from "../InputForm";
 import { usePostSignInMutation } from "@/queries";
 import { TokenService } from "@/service";
 import { toast } from "react-toastify";
-import { useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/constants";
 import { useKeyDown } from "@/hooks";
 import { useTheme } from "styled-components";
 
@@ -32,7 +30,6 @@ const LoginModal: React.FC<Props> = ({
     resetForm,
   } = useLoginForm();
   const postSignIn = usePostSignInMutation();
-  const queryClient = useQueryClient();
 
   useKeyDown(() => {
     if (!disableSubmit) {
@@ -54,7 +51,6 @@ const LoginModal: React.FC<Props> = ({
       const res = await postSignIn.mutateAsync(params);
       TokenService.setToken(res);
       toast.success("로그인 성공");
-      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER] });
       onClose();
     } catch (error) {
       console.log(error);

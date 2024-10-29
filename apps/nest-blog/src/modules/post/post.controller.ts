@@ -7,7 +7,9 @@ import {
   Post,
   Put,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 import { PostService } from './post.service';
@@ -24,6 +26,10 @@ import {
   PostEntityResponse,
   UpdatePostRequest,
 } from '@blog/types';
+import { UtilStrategy } from '@/strategies';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { extname } from 'path';
+import { diskStorage } from 'multer';
 
 @ApiTags('post')
 @Controller('post')
@@ -38,11 +44,24 @@ export class PostController {
     status: 201,
     description: 'Post successfully created.',
   })
+  @UseInterceptors(
+    FileInterceptor('thumbnail', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (_, file, cb) => {
+          const uniqueSuffix = `${new UtilStrategy().getUUID()}${extname(file.originalname)}`;
+          cb(null, uniqueSuffix);
+        },
+      }),
+      limits: { fileSize: 5 * 1024 * 1024 },
+    }),
+  )
   async createPost(
     @Body(ValidationPipe) body: CreatePostRequest,
     @GetUser('id') userId: string,
+    @UploadedFile() file?: Express.Multer.File,
   ): Promise<MessageResponse> {
-    return await this.postService.createPost(body, userId);
+    return await this.postService.createPost(body, userId, file);
   }
 
   @Get('/list')
