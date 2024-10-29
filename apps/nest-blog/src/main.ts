@@ -24,6 +24,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('My API')
     .setDescription('API documentation for my project')
+    .addServer('http://localhost:3000/', 'Local environment')
     .setVersion('1.0')
     .addTag('MyTag')
     .build();
@@ -34,7 +35,7 @@ async function bootstrap() {
   });
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document);
 
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
