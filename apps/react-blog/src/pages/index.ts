@@ -1,2 +1,2 @@
-export * from "./TrendPage";
+export * from "./MyPostPage";
 export * from "./RecentPage";

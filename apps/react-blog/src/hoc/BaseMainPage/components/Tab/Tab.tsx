@@ -1,8 +1,9 @@
-import { FlexRow } from "@/components";
-import { H5 } from "@/theme";
 import React from "react";
+import { FlexRow } from "@/components";
+import { BM } from "@/theme";
 import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { Container, ActiveTab } from "./styles";
+import { useGetUserQuery } from "@/queries";
 
 interface Props {
   tabKey: string;
@@ -13,7 +14,12 @@ interface Props {
 const Tab: React.FC<Props> = ({ tabKey, tabName, icon }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const getUser = useGetUserQuery();
   const isCurrentTab = tabKey === location.pathname;
+
+  if (!getUser.data && tabKey === "/my/post") {
+    return null;
+  }
 
   return (
     <Container onClick={() => navigate(tabKey)}>
@@ -24,7 +30,7 @@ const Tab: React.FC<Props> = ({ tabKey, tabName, icon }) => {
         style={{ display: "flex" }}
       >
         {icon}
-        {tabName}
+        <BM>{tabName}</BM>
       </FlexRow>
       {isCurrentTab && <ActiveTab />}
     </Container>
@@ -32,16 +38,3 @@ const Tab: React.FC<Props> = ({ tabKey, tabName, icon }) => {
 };
 
 export default Tab;
-
-const Container = styled(H5)`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  height: 30px;
-  cursor: pointer;
-`;
-
-const ActiveTab = styled.div`
-  width: 100%;
-  border-bottom: 2px solid;
-`;

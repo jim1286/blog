@@ -1,19 +1,19 @@
 import React from "react";
 import { Header, Tab } from "./components";
 import { Outlet } from "react-router-dom";
-import { IconTimeline, IconTrendingUp } from "@tabler/icons-react";
+import { IconHome, IconTimeline } from "@tabler/icons-react";
 import { Container, Tabs } from "./styles";
 
 const tabs = [
   {
     key: "/recent",
     tabName: "최신",
-    icon: <IconTimeline />,
+    icon: <IconTimeline size={20} />,
   },
   {
-    key: "/trend",
-    tabName: "트렌드",
-    icon: <IconTrendingUp />,
+    key: "/my/post",
+    tabName: "내 게시물",
+    icon: <IconHome size={20} />,
   },
 ];
 

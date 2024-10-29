@@ -5,7 +5,6 @@ import { H5 } from "@/theme";
 import { TokenService } from "@/service";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
-import { QUERY_KEYS } from "@/constants";
 
 interface Props {
   isOpen: boolean;
@@ -17,7 +16,7 @@ const LogoutModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const handleLogout = async () => {
     TokenService.clearToken();
-    queryClient.removeQueries({ queryKey: [QUERY_KEYS.USER] });
+    queryClient.resetQueries();
     toast.success("로그아웃 성공");
     onClose();
   };

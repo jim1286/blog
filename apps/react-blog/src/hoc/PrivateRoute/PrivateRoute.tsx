@@ -8,7 +8,7 @@ const PrivateRoute: React.FC = () => {
   const token = TokenService.getToken();
 
   if (getUser.isError || !token) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return !getUser.isLoading && <Outlet />;

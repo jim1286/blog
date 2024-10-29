@@ -13,6 +13,6 @@ export const Tabs = styled(MediaBasePadding)`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100px;
+  height: 80px;
   gap: 20px;
 `;
