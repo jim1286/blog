@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { PostEntity } from '.';
 import { BaseEntity } from './base.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('Tag')
 export class TagEntity extends BaseEntity {
@@ -11,5 +12,6 @@ export class TagEntity extends BaseEntity {
   post: PostEntity;
 
   @Column()
+  @Exclude()
   postId: string;
 }

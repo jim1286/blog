@@ -7,6 +7,7 @@ import {
   UserEntity,
 } from '.';
 import { BaseEntity } from './base.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('Post')
 export class PostEntity extends BaseEntity {
@@ -23,6 +24,7 @@ export class PostEntity extends BaseEntity {
   user: UserEntity;
 
   @Column()
+  @Exclude()
   userId: string;
 
   @OneToMany(() => TagEntity, (tag) => tag.post)
