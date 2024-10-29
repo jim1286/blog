@@ -5,13 +5,12 @@ export interface PostSignInRequest {
   password: string;
 }
 
+export interface PostCheckUserNameRequest {
+  userName: string;
+}
+
 export interface PostSignUpRequest extends PostSignInRequest {
-  thumbnail: File;
+  thumbnail?: File;
 }
 
 export type GetUserRequest = TokenPayload;
-
-export interface CreateUserRequest extends PostSignInRequest {
-  name: string;
-  role: RoleType;
-}

@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 export const useLoginForm = () => {
   const validate = useValidate();
   const [loginInfo, setLoginInfo] = useState<LoginFormInfoType>({
-    id: "",
+    userName: "",
     password: "",
   });
   const [loginValidate, setLoginValidate] = useState<LoginFormValidateType>({
-    id: "null",
+    userName: "null",
     password: "null",
   });
 
@@ -38,11 +38,11 @@ export const useLoginForm = () => {
 
   const resetForm = () => {
     setLoginInfo({
-      id: "",
+      userName: "",
       password: "",
     });
     setLoginValidate({
-      id: "null",
+      userName: "null",
       password: "null",
     });
   };

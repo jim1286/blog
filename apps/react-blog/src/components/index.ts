@@ -7,3 +7,4 @@ export * from "./PostComponent";
 export * from "./Loading";
 export * from "./NotificationIcon";
 export * from "./LogoutModal";
+export * from "./SignUpModal";

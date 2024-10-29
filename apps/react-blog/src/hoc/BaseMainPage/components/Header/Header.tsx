@@ -1,4 +1,4 @@
-import { FlexRow, LoginModal, LogoutModal } from "@/components";
+import { FlexRow, LoginModal, LogoutModal, SignUpModal } from "@/components";
 import { BSS, H3 } from "@/theme";
 import { IconKeyOff, IconLogin } from "@tabler/icons-react";
 import { useState } from "react";
@@ -10,6 +10,7 @@ const Header = () => {
   const getUser = useGetUserQuery();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [signUpModalOpen, setSignUpModalOpen] = useState(false);
 
   return (
     <Container>
@@ -40,6 +41,13 @@ const Header = () => {
       <LoginModal
         isOpen={loginModalOpen}
         onClose={() => setLoginModalOpen(false)}
+        onOpenSignUpModal={() => {
+          setSignUpModalOpen(true);
+        }}
+      />
+      <SignUpModal
+        isOpen={signUpModalOpen}
+        onClose={() => setSignUpModalOpen(false)}
       />
     </Container>
   );

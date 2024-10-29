@@ -1,16 +1,15 @@
 import { axiosInstance } from ".";
-import { CreateUserRequest, CreateUserResponse, GetUserResponse, PostSignInRequest, PostSignInResponse } from "@blog/types";
+import {
+  GetUserResponse,
+  MessageResponse,
+  PostCheckUserNameRequest,
+  PostSignInRequest,
+  PostSignInResponse,
+  PostSignUpRequest,
+  PostSignUpResponse,
+} from "@blog/types";
 
 const USER_URI = "/user";
-
-export const createUser = async (
-  params: CreateUserRequest
-): Promise<CreateUserResponse> => {
-  const uri = `${USER_URI}`;
-  const res = await axiosInstance.post(uri, params);
-
-  return res.data;
-};
 
 export const getUser = async (): Promise<GetUserResponse> => {
   const uri = `${USER_URI}`;
@@ -24,6 +23,38 @@ export const postSignIn = async (
 ): Promise<PostSignInResponse> => {
   const uri = `${USER_URI}/signin`;
   const res = await axiosInstance.post(uri, params);
+
+  return res.data;
+};
+
+export const postCheckUserName = async (
+  params: PostCheckUserNameRequest
+): Promise<MessageResponse> => {
+  const uri = `${USER_URI}/check/userName`;
+  const res = await axiosInstance.post(uri, params);
+
+  return res.data;
+};
+
+export const postSignUp = async (
+  params: PostSignUpRequest
+): Promise<PostSignUpResponse> => {
+  const uri = `${USER_URI}/signup`;
+  const formData = new FormData();
+
+  for (const [key, value] of Object.entries(params)) {
+    if (key === "thumbnail" && value) {
+      formData.append(key, value);
+    } else {
+      formData.append(key, value);
+    }
+  }
+
+  const res = await axiosInstance.post(uri, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 
   return res.data;
 };

@@ -1,19 +1,39 @@
 const useCheckInput = () => {
-  const checkSpace = (str: string) => {
+  const checkNull = (str: string) => {
     if (!str) {
-      return 'null';
+      return "null";
     }
 
-    return str.includes(' ') ? 'space' : 'valid';
+    return "valid";
   };
 
-  const checkPassword = (str: string) => {
+  const checkSpace = (str: string) => {
     if (!str) {
-      return 'null';
+      return "null";
     }
 
-    if (str.length < 6) {
-      return 'weak';
+    return str.includes(" ") ? "space" : "valid";
+  };
+
+  const checkWeakAndSpace = (str: string, weakLength: number) => {
+    if (!str) {
+      return "null";
+    }
+
+    if (str.length < weakLength) {
+      return "weak";
+    }
+
+    return checkSpace(str);
+  };
+
+  const checkMaxAndSpace = (str: string, maxLength: number) => {
+    if (!str) {
+      return "null";
+    }
+
+    if (str.length > maxLength) {
+      return "max";
     }
 
     return checkSpace(str);
@@ -21,17 +41,23 @@ const useCheckInput = () => {
 
   const checkPasswordConfirm = (str: string, compare: string) => {
     if (!str) {
-      return 'null';
+      return "null";
     }
 
     if (str !== compare) {
-      return 'incorrect';
+      return "incorrect";
     }
 
-    return 'valid';
+    return "valid";
   };
 
-  return { checkSpace, checkPassword, checkPasswordConfirm };
+  return {
+    checkNull,
+    checkSpace,
+    checkWeakAndSpace,
+    checkMaxAndSpace,
+    checkPasswordConfirm,
+  };
 };
 
 export default useCheckInput;

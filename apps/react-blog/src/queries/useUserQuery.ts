@@ -20,8 +20,14 @@ export const usePostSignInMutation = () => {
   });
 };
 
-export const useCreateUserMutation = () => {
+export const usePostCheckUserNameMutation = () => {
   return useMutation({
-    mutationFn: UserService.createUser,
+    mutationFn: UserService.postCheckUserName,
+  });
+};
+
+export const usePostSignUpMutation = () => {
+  return useMutation({
+    mutationFn: UserService.postSignUp,
   });
 };

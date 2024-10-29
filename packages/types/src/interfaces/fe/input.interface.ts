@@ -1,11 +1,23 @@
 export interface LoginFormInfoType {
-  id: string;
+  userName: string;
   password: string;
 }
 
+export interface SignUpFormInfoType {
+  userName: string;
+  password: string;
+  passwordConfirm: string;
+}
+
 export interface LoginFormValidateType {
-  id: InputValidType;
+  userName: InputValidType;
   password: InputValidType;
+}
+
+export interface SignUpFormValidateType {
+  userName: InputValidType;
+  password: InputValidType;
+  passwordConfirm: InputValidType;
 }
 
 export interface UserFormInfoType {
@@ -24,4 +36,10 @@ export interface UserFormValidateType {
   role: InputValidType;
 }
 
-export type InputValidType = "valid" | "null" | "weak" | "space" | "incorrect";
+export type InputValidType =
+  | "valid"
+  | "null"
+  | "weak"
+  | "space"
+  | "incorrect"
+  | "duplicate";

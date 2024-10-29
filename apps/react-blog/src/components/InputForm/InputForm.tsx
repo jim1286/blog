@@ -1,8 +1,8 @@
-import React from 'react';
-import { Spacer, ErrorMessage, Input } from '@/components';
-import { BS } from '@/theme';
-import { Container, InputTitle, Label } from './styles';
-import { useTheme } from 'styled-components';
+import React from "react";
+import { Spacer, ErrorMessage, Input } from "@/components";
+import { BS } from "@/theme";
+import { Container, InputTitle, Label } from "./styles";
+import { useTheme } from "styled-components";
 
 interface InputFormProps {
   title: string;
@@ -35,7 +35,7 @@ const InputForm: React.FC<InputFormProps> = ({
     <Container subTitle={subTitle}>
       <InputTitle>
         {title}
-        {isNecessary && <Label>{'*'}</Label>}
+        {isNecessary && <Label>{"*"}</Label>}
       </InputTitle>
       {subTitle && <BS color={theme.text.secondary}>{subTitle}</BS>}
       <Spacer size={4} type="horizontal" />

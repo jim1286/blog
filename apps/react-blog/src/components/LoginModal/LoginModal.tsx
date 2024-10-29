@@ -1,7 +1,7 @@
 import { Button, Modal } from "antd";
 import React from "react";
 import { FlexColumn, FlexRow } from "../BaseStyle";
-import { H5 } from "@/theme";
+import { BSS, H5 } from "@/theme";
 import { useLoginForm } from "./hook";
 import { InputForm } from "../InputForm";
 import { usePostSignInMutation } from "@/queries";
@@ -10,13 +10,20 @@ import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/constants";
 import { useKeyDown } from "@/hooks";
+import { useTheme } from "styled-components";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  onOpenSignUpModal: () => void;
 }
 
-const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
+const LoginModal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  onOpenSignUpModal,
+}) => {
+  const theme = useTheme();
   const {
     loginInfo,
     loginValidate,
@@ -34,13 +41,13 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
   }, ["Enter"]);
 
   const handleLogin = async () => {
-    if (!loginInfo.id || !loginInfo.password) {
+    if (!loginInfo.userName || !loginInfo.password) {
       return;
     }
 
     try {
       const params = {
-        userName: loginInfo.id,
+        userName: loginInfo.userName,
         password: loginInfo.password,
       };
 
@@ -57,18 +64,23 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
     }
   };
 
+  const handleCloseModal = () => {
+    onClose();
+    resetForm();
+  };
+
   return (
-    <Modal open={isOpen} footer={null} onCancel={onClose} centered>
+    <Modal open={isOpen} footer={null} onCancel={handleCloseModal} centered>
       <FlexColumn height="300px">
         <H5 style={{ height: "50px" }}>로그인</H5>
         <FlexColumn width="100%" style={{ flex: 1 }} gap={10}>
           <InputForm
             title="아이디"
             placeholder="아이디를 입력하세요"
-            formKey="id"
-            value={loginInfo.id}
+            formKey="userName"
+            value={loginInfo.userName}
             errorMessage={
-              loginValidate.id === "space"
+              loginValidate.userName === "space"
                 ? "공백은 입력할 수 없습니다."
                 : undefined
             }
@@ -90,17 +102,32 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
             isNecessary
           />
         </FlexColumn>
-        <FlexRow width="100%">
-          <FlexRow style={{ flex: 1 }} />
-          <FlexRow gap={5}>
-            <Button type="primary" onClick={onClose}>
-              취소
-            </Button>
-            <Button disabled={disableSubmit} onClick={handleLogin}>
-              로그인
-            </Button>
+        <FlexColumn width="100%">
+          <FlexRow width="100%">
+            <FlexRow style={{ flex: 1 }} />
+            <FlexRow gap={5}>
+              <Button type="primary" onClick={handleCloseModal}>
+                취소
+              </Button>
+              <Button disabled={disableSubmit} onClick={handleLogin}>
+                로그인
+              </Button>
+            </FlexRow>
           </FlexRow>
-        </FlexRow>
+          <FlexRow gap={5}>
+            <BSS>아이디가 없으신가요?</BSS>
+            <BSS
+              color={theme.text.information}
+              onClick={() => {
+                handleCloseModal();
+                onOpenSignUpModal();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              회원가입
+            </BSS>
+          </FlexRow>
+        </FlexColumn>
       </FlexColumn>
     </Modal>
   );

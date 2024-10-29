@@ -1,7 +1,7 @@
 import { JwtTokens } from "@/interfaces";
 import { UserEntityResponse } from "..";
 
-export type CreateUserResponse = UserEntityResponse;
+export type PostSignUpResponse = UserEntityResponse;
 
 export type PostSignInResponse = JwtTokens;
 
