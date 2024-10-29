@@ -1,6 +1,6 @@
 import App from "@/app/App";
 import { BaseMainPage, PrivateRoute } from "@/hoc";
-import { RecentPage, MyPostPage } from "@/pages";
+import { RecentPage, MyPostPage, CreatePostPage } from "@/pages";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
               {
                 path: "post", // 상대 경로로 수정
                 element: <MyPostPage />,
+              },
+              {
+                path: "create", // 상대 경로로 수정
+                element: <CreatePostPage />,
               },
             ],
           },

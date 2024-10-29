@@ -17,18 +17,13 @@ const Tab: React.FC<Props> = ({ tabKey, tabName, icon }) => {
   const getUser = useGetUserQuery();
   const isCurrentTab = tabKey === location.pathname;
 
-  if (!getUser.data && tabKey === "/my/post") {
+  if (!getUser.data && tabKey !== "/recent") {
     return null;
   }
 
   return (
     <Container onClick={() => navigate(tabKey)}>
-      <FlexRow
-        gap={5}
-        justifyContent="center"
-        alignItems="center"
-        style={{ display: "flex" }}
-      >
+      <FlexRow gap={2} alignItems="center" style={{ display: "flex" }}>
         {icon}
         <BM>{tabName}</BM>
       </FlexRow>
