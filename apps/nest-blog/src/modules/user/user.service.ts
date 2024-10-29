@@ -11,6 +11,7 @@ import {
   MessageResponse,
   PostSignInResponse,
   UserEntityResponse,
+  PostCheckUserNameRequest,
 } from '@blog/types';
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from './user.repository';
@@ -46,6 +47,18 @@ export class UserService {
     const refreshToken = await this.jwtStrategy.getRefreshToken(payload);
 
     return { accessToken, refreshToken };
+  }
+
+  async checkUserName(
+    body: PostCheckUserNameRequest,
+  ): Promise<MessageResponse> {
+    const user = await this.userRepository.getUserByUsername(body.userName);
+
+    if (user) {
+      return { message: '동일한 유저 아이디가 존재합니다.' };
+    }
+
+    return { message: '사용 가능한 유저 아이디입니다.' };
   }
 
   async createUser(

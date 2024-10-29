@@ -15,6 +15,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import {
   MessageResponse,
+  PostCheckUserNameRequest,
   PostSignInRequest,
   PostSignInResponse,
   PostSignUpRequest,
@@ -34,6 +35,13 @@ export class UserController {
     @Body(ValidationPipe) body: PostSignInRequest,
   ): Promise<PostSignInResponse> {
     return this.userService.signIn(body);
+  }
+
+  @Post('/check/userName')
+  postCheckUserName(
+    @Body(ValidationPipe) body: PostCheckUserNameRequest,
+  ): Promise<MessageResponse> {
+    return this.userService.checkUserName(body);
   }
 
   @Post('/signup')
