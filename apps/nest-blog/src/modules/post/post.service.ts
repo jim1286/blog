@@ -51,13 +51,13 @@ export class PostService {
 
       // tag를 시간 순으로 저장하기 위해
       // promise all 사용하지 않음
-      for (const tag of tags) {
-        const newTag = this.tagRepository.create({
+      const newTags = tags.map((tag) =>
+        this.tagRepository.create({
           post: savedPost,
           content: tag,
-        });
-        await this.tagRepository.save(newTag);
-      }
+        }),
+      );
+      await this.tagRepository.save(newTags);
 
       return { message: '생성 완료' };
     } catch (error) {

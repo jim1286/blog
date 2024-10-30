@@ -42,6 +42,8 @@ export const createPost = async (
   for (const [key, value] of Object.entries(params)) {
     if (key === "thumbnail" && value) {
       formData.append(key, value);
+    } else if (Array.isArray(value)) {
+      value.forEach((item) => formData.append(key, item)); // 배열인 경우 각 요소 추가
     } else {
       formData.append(key, value);
     }
