@@ -18,6 +18,7 @@ import {
 } from "@/components";
 import { Button } from "antd";
 import { useTheme } from "styled-components";
+import { useKeyDown } from "@/hooks";
 
 const PostPage: React.FC = () => {
   const theme = useTheme();
@@ -27,8 +28,12 @@ const PostPage: React.FC = () => {
   const createComment = useCreateCommentMutation();
   const [content, setContent] = useState("");
 
+  useKeyDown(() => {
+    handleSubmitComment();
+  }, ["Enter"]);
+
   const handleSubmitComment = async () => {
-    if (!content || !postId) {
+    if (!content || !postId || !content.trim()) {
       return;
     }
 
@@ -82,7 +87,7 @@ const PostPage: React.FC = () => {
         <FlexRow width="100%" justifyContent="flex-end">
           <Button
             type="primary"
-            disabled={!content}
+            disabled={!content || !content.trim()}
             onClick={handleSubmitComment}
           >
             작성하기

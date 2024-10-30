@@ -54,8 +54,9 @@ export const ActionButton = styled.button`
   background-color: ${({ theme }) => theme.icon.tertiary};
   color: white;
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 4px 6px;
   transition: background-color 0.3s;
+  font-size: 12px;
 
   &:hover {
     background-color: ${({ theme }) => theme.icon.secondary};
