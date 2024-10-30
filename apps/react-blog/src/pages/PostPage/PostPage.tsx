@@ -105,6 +105,7 @@ const PostPage: React.FC = () => {
             key={index}
             isAuthor={comment.user.id === getPost.data.user.id}
             comment={comment}
+            postId={postId}
           />
         ))}
       </FlexColumn>

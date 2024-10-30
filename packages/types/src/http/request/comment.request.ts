@@ -3,6 +3,12 @@ export interface CreateCommentRequest {
   content: string;
 }
 
+export interface CreateCommentReplyRequest {
+  postId: string;
+  commentId: string;
+  content: string;
+}
+
 export interface GetCommentListRequest {
   postId: string;
 }

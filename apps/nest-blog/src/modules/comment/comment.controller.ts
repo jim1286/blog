@@ -16,6 +16,7 @@ import {
   CreateCommentRequest,
   MessageResponse,
   CommentEntityResponse,
+  CreateCommentReplyRequest,
 } from '@blog/types';
 
 @ApiTags('comment')
@@ -35,17 +36,10 @@ export class CommentController {
   @Post('/create/reply')
   @UseGuards(JwtAuthGuard)
   async createReply(
-    @Body(ValidationPipe) body: CreateCommentRequest,
+    @Body(ValidationPipe) body: CreateCommentReplyRequest,
     @GetUser('id') userId: string,
-    @Query('postId') postId: string,
-    @Query('commentId') commentId: string,
   ): Promise<MessageResponse> {
-    return await this.commentService.createReply(
-      postId,
-      userId,
-      commentId,
-      body,
-    );
+    return await this.commentService.createReply(userId, body);
   }
 
   @Get('/list')

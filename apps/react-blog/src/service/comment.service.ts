@@ -1,4 +1,5 @@
 import {
+  CreateCommentReplyRequest,
   CreateCommentRequest,
   GetCommentListRequest,
   GetCommentListResponse,
@@ -12,6 +13,15 @@ export const createComment = async (
   params: CreateCommentRequest
 ): Promise<MessageResponse> => {
   const uri = `${COMMENT_URI}/create`;
+  const res = await axiosInstance.post(uri, params);
+
+  return res.data;
+};
+
+export const createCommentReply = async (
+  params: CreateCommentReplyRequest
+): Promise<MessageResponse> => {
+  const uri = `${COMMENT_URI}/create/reply`;
   const res = await axiosInstance.post(uri, params);
 
   return res.data;

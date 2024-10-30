@@ -10,6 +10,7 @@ import {
   CreateCommentRequest,
   MessageResponse,
   CommentEntityResponse,
+  CreateCommentReplyRequest,
 } from '@blog/types';
 
 @Injectable()
@@ -44,18 +45,13 @@ export class CommentService {
   }
 
   async createReply(
-    postId: string,
     userId: string,
-    commentId: string,
-    body: CreateCommentRequest,
+    body: CreateCommentReplyRequest,
   ): Promise<MessageResponse> {
+    const { postId, commentId, content } = body;
     const post = await this.postService.getPostByPostId(postId);
     const user = await this.userService.getUserByUserId(userId);
-    const comment =
-      await this.commentRepository.getCommentWithReplyByCommentIdAndPostId(
-        postId,
-        commentId,
-      );
+    const comment = await this.getCommentByCommentId(commentId);
 
     if (!comment) {
       throw new NotFoundException('댓글이 존재하지 않습니다.');
@@ -65,7 +61,7 @@ export class CommentService {
       post,
       user,
       parent: comment,
-      ...body,
+      content,
     });
 
     try {
@@ -79,9 +75,7 @@ export class CommentService {
   async getCommentByCommentId(
     commentId: string,
   ): Promise<CommentEntityResponse> {
-    return await this.commentRepository.getCommentWithReplyByCommentId(
-      commentId,
-    );
+    return await this.commentRepository.getCommentByCommentId(commentId);
   }
 
   async getCommentListByPostId(

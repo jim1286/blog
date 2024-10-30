@@ -13,6 +13,17 @@ export const useCreateCommentMutation = () => {
   });
 };
 
+export const useCreateCommentReplyMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: CommentService.createCommentReply,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COMMENT_LIST] });
+    },
+  });
+};
+
 export const useGetCommentListQuery = (postId?: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.COMMENT_LIST, postId],
