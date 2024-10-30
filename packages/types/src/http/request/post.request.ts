@@ -1,3 +1,7 @@
+export interface GetPostRequest {
+  postId: string;
+}
+
 export interface CreatePostRequest {
   title: string;
   subTitle?: string;

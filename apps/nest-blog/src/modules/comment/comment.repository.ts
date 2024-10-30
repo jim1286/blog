@@ -13,7 +13,9 @@ export class CommentRepository extends Repository<CommentEntity> {
       this.createQueryBuilder('comment');
 
     return await queryBuilder
+      .leftJoinAndSelect('comment.user', 'user')
       .leftJoinAndSelect('comment.children', 'children')
+      .leftJoinAndSelect('comment.commentFavorites', 'commentFavorites')
       .where('comment.postId = :postId', { postId })
       .orderBy('comment.createdAt', 'DESC')
       .getMany();

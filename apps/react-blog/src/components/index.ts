@@ -10,3 +10,5 @@ export * from "./LogoutModal";
 export * from "./SignUpModal";
 export * from "./Tag";
 export * from "./ImageUpload";
+export * from "./UserProfile";
+export * from "./CommentComponent";

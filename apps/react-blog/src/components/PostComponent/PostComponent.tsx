@@ -8,21 +8,22 @@ import {
   PostText,
   Thumbnail,
   Title,
-  UserThumbnail,
-  Wrap,
 } from "./styles";
 import { DateUtil } from "@/utils";
-import { BSS } from "@/theme";
 import { PostEntityResponse } from "@blog/types";
 import NoImage from "../../../public/images/NoImage.png";
+import { useNavigate } from "react-router-dom";
+import { UserProfile } from "..";
 
 interface Props {
   post: PostEntityResponse;
 }
 
 const PostComponent: React.FC<Props> = ({ post }) => {
+  const navigate = useNavigate();
+
   return (
-    <Container>
+    <Container onClick={() => navigate(`/post/${post.id}`)}>
       <Thumbnail
         src={post.thumbnailUrl || NoImage}
         thumbnailMode={!!post.thumbnailUrl}
@@ -34,14 +35,10 @@ const PostComponent: React.FC<Props> = ({ post }) => {
           <PostText>{DateUtil.utcToLocalYYYYMMDD(post.createdAt)}</PostText>
         </ContentWrap>
         <Footer>
-          <Wrap>
-            <UserThumbnail
-              src={post.user.thumbnailUrl}
-              style={{ background: `${post.user.thumbnailUrl || "black"}` }}
-            />
-            <PostText>by</PostText>
-            <BSS>{post.user.userName}</BSS>
-          </Wrap>
+          <UserProfile
+            thumbnailUrl={post.user.thumbnailUrl}
+            userName={post.user.userName}
+          />
         </Footer>
       </Body>
     </Container>

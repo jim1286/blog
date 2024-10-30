@@ -114,16 +114,3 @@ export const Content = styled(BSS)`
 export const PostText = styled(BSS)`
   color: ${({ theme }) => theme.text.tertiary};
 `;
-
-export const Wrap = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`;
-
-export const UserThumbnail = styled.img`
-  width: 20px;
-  height: 20px;
-  object-fit: cover;
-  border-radius: 50%;
-`;

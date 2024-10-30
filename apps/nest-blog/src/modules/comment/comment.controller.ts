@@ -20,20 +20,20 @@ import {
 
 @ApiTags('comment')
 @Controller('comment')
-@UseGuards(JwtAuthGuard)
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Post('/create')
+  @UseGuards(JwtAuthGuard)
   async createComment(
     @Body(ValidationPipe) body: CreateCommentRequest,
     @GetUser('id') userId: string,
-    @Query('postId') postId: string,
   ): Promise<MessageResponse> {
-    return await this.commentService.createComment(postId, userId, body);
+    return await this.commentService.createComment(userId, body);
   }
 
   @Post('/create/reply')
+  @UseGuards(JwtAuthGuard)
   async createReply(
     @Body(ValidationPipe) body: CreateCommentRequest,
     @GetUser('id') userId: string,
@@ -56,6 +56,7 @@ export class CommentController {
   }
 
   @Delete('/')
+  @UseGuards(JwtAuthGuard)
   async deleteComment(
     @GetUser('id') userId: string,
     @Query('postId') postId: string,
@@ -65,6 +66,7 @@ export class CommentController {
   }
 
   @Delete('/reply')
+  @UseGuards(JwtAuthGuard)
   async deleteReply(
     @GetUser('id') userId: string,
     @Query('postId') postId: string,

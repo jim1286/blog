@@ -23,7 +23,11 @@ export class PostRepository extends Repository<PostEntity> {
     const queryBuilder: SelectQueryBuilder<PostEntity> =
       this.createQueryBuilder('post');
 
-    return await queryBuilder.where('post.id = :postId', { postId }).getOne();
+    return await queryBuilder
+      .where('post.id = :postId', { postId })
+      .leftJoinAndSelect('post.user', 'user')
+      .leftJoinAndSelect('post.tags', 'tag')
+      .getOne();
   }
 
   async deletePostByPostId(postId: string) {

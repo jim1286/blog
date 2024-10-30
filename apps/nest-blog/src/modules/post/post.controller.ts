@@ -14,12 +14,7 @@ import {
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { GetUser } from '@/decorators';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import {
   CreatePostRequest,
   MessageResponse,
@@ -38,12 +33,6 @@ export class PostController {
 
   @Post('/create')
   @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
-  @ApiOperation({ summary: 'Create a new post' })
-  @ApiResponse({
-    status: 201,
-    description: 'Post successfully created.',
-  })
   @UseInterceptors(
     FileInterceptor('thumbnail', {
       storage: diskStorage({

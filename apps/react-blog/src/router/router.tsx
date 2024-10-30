@@ -1,6 +1,6 @@
 import App from "@/app/App";
 import { BaseMainPage, PrivateRoute } from "@/hoc";
-import { RecentPage, MyPostPage, CreatePostPage } from "@/pages";
+import { RecentPage, MyPostPage, CreatePostPage, PostPage } from "@/pages";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -14,26 +14,30 @@ const router = createBrowserRouter([
         children: [
           {
             path: "", // 기본 경로에서 recent로 리다이렉션
-            element: <Navigate to="recent" />, // 상대 경로로 수정
+            element: <Navigate to="recent" />,
           },
           {
-            path: "recent", // 상대 경로로 수정
+            path: "recent",
             element: <RecentPage />,
           },
           {
-            path: "my", // 상대 경로로 수정
+            path: "post/:postId",
+            element: <PostPage />,
+          },
+          {
+            path: "my",
             element: <PrivateRoute />,
             children: [
               {
                 path: "", // /my 경로에서 post로 리다이렉션
-                element: <Navigate to="post" />, // 상대 경로로 수정
+                element: <Navigate to="post" />,
               },
               {
-                path: "post", // 상대 경로로 수정
+                path: "post",
                 element: <MyPostPage />,
               },
               {
-                path: "create", // 상대 경로로 수정
+                path: "create",
                 element: <CreatePostPage />,
               },
             ],

@@ -1,4 +1,4 @@
-import { RoleType, TokenPayload } from "@/interfaces";
+import { TokenPayload } from "@/interfaces";
 
 export interface PostSignInRequest {
   userName: string;

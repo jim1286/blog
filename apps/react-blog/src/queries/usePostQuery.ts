@@ -1,7 +1,15 @@
 import { QUERY_KEYS } from "@/constants";
-import { PostService } from "@/service";
+import { CommentService, PostService } from "@/service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useGetUserQuery } from "./useUserQuery";
+
+export const useGetPostQuery = (postId?: string) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.POST, postId],
+    enabled: !!postId,
+    queryFn: () => PostService.getPost({ postId: postId! }),
+  });
+};
 
 export const useGetPostListQuery = () => {
   const getUser = useGetUserQuery();

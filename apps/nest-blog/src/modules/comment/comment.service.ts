@@ -21,10 +21,10 @@ export class CommentService {
   ) {}
 
   async createComment(
-    postId: string,
     userId: string,
     body: CreateCommentRequest,
-  ) {
+  ): Promise<MessageResponse> {
+    const { postId, content } = body;
     const post = await this.postService.getPostByPostId(postId);
     const user = await this.userService.getUserByUserId(userId);
     const newComment = this.commentRepository.create({
@@ -32,7 +32,7 @@ export class CommentService {
       user,
       parent: null,
       parentId: null,
-      ...body,
+      content,
     });
 
     try {
@@ -48,7 +48,7 @@ export class CommentService {
     userId: string,
     commentId: string,
     body: CreateCommentRequest,
-  ) {
+  ): Promise<MessageResponse> {
     const post = await this.postService.getPostByPostId(postId);
     const user = await this.userService.getUserByUserId(userId);
     const comment =

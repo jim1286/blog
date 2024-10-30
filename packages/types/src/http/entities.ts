@@ -14,9 +14,7 @@ export interface BookmarkEntityResponse extends BaseEntityResponse {
 
 export interface CommentEntityResponse extends BaseEntityResponse {
   content: string;
-  userId: string;
-  postId: string;
-  parentId?: string;
+  user: UserEntityResponse;
   children: CommentEntityResponse[];
   commentFavorites: CommentFavoriteEntityResponse[];
 }
@@ -30,8 +28,9 @@ export interface PostEntityResponse extends BaseEntityResponse {
   title: string;
   subTitle?: string;
   content: string;
-  user: UserEntityResponse;
   thumbnailUrl?: string;
+  user: UserEntityResponse;
+  tags: TagEntityResponse[];
 }
 
 export interface PostFavoriteEntityResponse extends BaseEntityResponse {

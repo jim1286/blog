@@ -12,14 +12,16 @@ const Tag: React.FC<Props> = ({ tagName, onClickTag, onDeleteTag }) => {
   return (
     <Container onClick={() => onClickTag?.(tagName)}>
       {tagName}
-      <IconX
-        size={14}
-        cursor="pointer"
-        onClick={(e) => {
-          e.stopPropagation();
-          onDeleteTag?.(tagName);
-        }}
-      />
+      {onDeleteTag && (
+        <IconX
+          size={14}
+          cursor="pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDeleteTag(tagName);
+          }}
+        />
+      )}
     </Container>
   );
 };

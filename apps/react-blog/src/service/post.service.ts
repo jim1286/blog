@@ -2,11 +2,22 @@ import {
   CreatePostRequest,
   GetPostListAllResponse,
   GetPostListResponse,
+  GetPostRequest,
+  GetPostResponse,
   MessageResponse,
 } from "@blog/types";
 import { axiosInstance } from ".";
 
 const POST_URI = "/post";
+
+export const getPost = async (
+  params: GetPostRequest
+): Promise<GetPostResponse> => {
+  const uri = `${POST_URI}`;
+  const res = await axiosInstance.get(uri, { params });
+
+  return res.data;
+};
 
 export const getPostList = async (): Promise<GetPostListResponse> => {
   const uri = `${POST_URI}/list`;

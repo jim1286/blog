@@ -15,7 +15,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
   value,
-  type,
+  type = "text",
   size = "md",
   disabled = false,
   isError = false,
@@ -24,12 +24,7 @@ const Input: React.FC<InputProps> = ({
   defaultValue,
   onChange,
 }) => {
-  const InputInteractive = () => {
-    const errorClass = isError ? "input-error" : "";
-
-    const className = `${errorClass}`;
-    return className;
-  };
+  const className = isError ? "input-error" : "";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -47,9 +42,9 @@ const Input: React.FC<InputProps> = ({
       disabled={disabled}
       placeholder={placeholder}
       onChange={handleInputChange}
-      className={InputInteractive()}
+      className={className}
     />
   );
 };
 
-export default React.memo(Input);
+export default Input;
