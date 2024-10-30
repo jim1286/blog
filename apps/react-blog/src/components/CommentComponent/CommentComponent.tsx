@@ -8,12 +8,14 @@ import {
   CommentActions,
   ActionButton,
   AuthorTag,
+  FavoriteText,
 } from "./styles";
 import { CommentEntityResponse } from "@blog/types";
 import { DateUtil } from "@/utils";
 import { BLS, BM } from "@/theme";
 import { FlexRow } from "../BaseStyle";
 import { IconHeart } from "@tabler/icons-react";
+import { useGetUserQuery, useUpdateCommentFavoriteMutation } from "@/queries";
 
 interface Props {
   isAuthor: boolean;
@@ -21,6 +23,20 @@ interface Props {
 }
 
 const CommentComponent: React.FC<Props> = ({ isAuthor, comment }) => {
+  const getUser = useGetUserQuery();
+  const updateCommentFavorite = useUpdateCommentFavoriteMutation();
+  const checkUserFavorite = comment.commentFavorites
+    .map((ele) => ele.userId)
+    .find((ele) => ele === getUser.data?.id);
+
+  const handleClickFavorite = async () => {
+    try {
+      await updateCommentFavorite.mutateAsync({ commentId: comment.id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       <AvatarImage
@@ -32,12 +48,20 @@ const CommentComponent: React.FC<Props> = ({ isAuthor, comment }) => {
           <FlexRow gap={5} alignItems="center">
             <BLS>{comment.user.userName}</BLS>
             {isAuthor && <AuthorTag>작성자</AuthorTag>}
+            <FavoriteText>
+              {comment.commentFavorites.length}개의 좋아요
+            </FavoriteText>
           </FlexRow>
           <FlexRow gap={5}>
             <CommentTime>
               {DateUtil.utcToLocalYYYYMMDDHHmm(comment.createdAt)}
             </CommentTime>
-            <IconHeart size={15} />
+            <IconHeart
+              size={15}
+              cursor="pointer"
+              onClick={handleClickFavorite}
+              fill={!!checkUserFavorite ? "red" : "white"}
+            />
           </FlexRow>
         </CommentHeader>
         <BM>{comment.content}</BM>

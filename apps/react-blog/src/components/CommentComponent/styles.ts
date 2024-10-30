@@ -62,3 +62,7 @@ export const ActionButton = styled.button`
     background-color: ${({ theme }) => theme.icon.secondary};
   }
 `;
+
+export const FavoriteText = styled.div`
+  font-size: 12px;
+`;

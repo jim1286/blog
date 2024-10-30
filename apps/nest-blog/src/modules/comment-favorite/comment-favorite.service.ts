@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { CommentFavoriteRepository } from './comment-favoirte.repository';
 import { UserService } from '../user/user.service';
 import { CommentService } from '../comment/comment.service';
-import { CommentFavoriteEntityResponse, MessageResponse } from '@blog/types';
+import {
+  CommentFavoriteEntityResponse,
+  MessageResponse,
+  UpdateCommentFavoriteRequest,
+} from '@blog/types';
 
 @Injectable()
 export class CommentFavoriteService {
@@ -14,8 +18,9 @@ export class CommentFavoriteService {
 
   async updateCommentFavorite(
     userId: string,
-    commentId: string,
+    body: UpdateCommentFavoriteRequest,
   ): Promise<MessageResponse> {
+    const { commentId } = body;
     const commentFavorite =
       await this.commentFavoriteRepository.getCommentFavoriteByUserIdAndCommentId(
         userId,
@@ -24,7 +29,8 @@ export class CommentFavoriteService {
 
     if (commentFavorite) {
       try {
-        await this.commentFavoriteRepository.deleteCommentFavoriteByCommentId(
+        await this.commentFavoriteRepository.deleteCommentFavoriteByUserIdAndCommentId(
+          userId,
           commentId,
         );
         return { message: '댓글 좋아요 삭제 성공' };

@@ -21,13 +21,17 @@ export class CommentFavoriteRepository extends Repository<CommentFavoriteEntity>
       .getOne();
   }
 
-  async deleteCommentFavoriteByCommentId(commentId: string) {
+  async deleteCommentFavoriteByUserIdAndCommentId(
+    userId: string,
+    commentId: string,
+  ) {
     const queryBuilder: SelectQueryBuilder<CommentFavoriteEntity> =
       this.createQueryBuilder('commentFavorite');
 
     return await queryBuilder
+      .where('commentFavorite.userId = :userId', { userId })
+      .andWhere('commentFavorite.commentId = :commentId', { commentId })
       .softDelete()
-      .where('commentFavorite.commentId = :commentId', { commentId })
       .execute();
   }
 
