@@ -50,10 +50,10 @@ export class PostRepository extends Repository<PostEntity> {
     const queryBuilder: SelectQueryBuilder<PostEntity> =
       this.createQueryBuilder('post');
 
-    await queryBuilder
-      .update(PostEntity)
-      .set(body)
-      .where('post.id = :postId', { postId })
-      .execute();
+    // await queryBuilder
+    //   .update(PostEntity)
+    //   .set(body)
+    //   .where('post.id = :postId', { postId })
+    //   .execute();
   }
 }

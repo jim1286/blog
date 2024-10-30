@@ -12,9 +12,8 @@ export const dataSource = new DataSource({
   username: process.env.DB_USER, // MySQL 설치시 설정한 유저네임을 입력하면 됩니다,
   // entity는 DB의 테이블을 지칭합니다. 따라서 어떤 테이블이 사용되는지. 테이블에 대한 정보를 가져오는 것.
   entities: [
-    // entity는 DB의 테이블을 지칭합니다. 따라서 어떤 테이블이 사용되는지. 테이블에 대한 정보를 가져오는 것.
-    path.join(__dirname, 'src/entities/**/*.entity.ts'),
+    path.join(__dirname, 'dist/src/entities/**/*.entity.js'), // 컴파일된 JS 파일 경로
   ],
-  synchronize: false, // 이건 무조건 false로 해둡시다.
+  synchronize: false, // 개발 환경에서는 필요할 때만 true로 설정
   logging: true, // typeorm 쿼리가 실행될 때, 터미널에 MySQL쿼리가 어떻게 짜여졌는지 보여줍니다.
 });
