@@ -52,12 +52,10 @@ export const CommentActions = styled.div`
 
 export const ActionButton = styled.button`
   background-color: ${({ theme }) => theme.icon.tertiary};
-  color: white; /* 버튼 텍스트 색상 */
-  border: none; /* 테두리 제거 */
-  border-radius: 4px; /* 모서리 둥글게 */
-  padding: 5px 10px; /* 버튼 안쪽 여백 */
-  cursor: pointer; /* 커서 포인터로 변경 */
-  transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+  color: white;
+  border-radius: 4px;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
 
   &:hover {
     background-color: ${({ theme }) => theme.icon.secondary};
