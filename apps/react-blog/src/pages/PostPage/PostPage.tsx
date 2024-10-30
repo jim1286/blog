@@ -34,6 +34,7 @@ const PostPage: React.FC = () => {
 
     try {
       await createComment.mutateAsync({ postId, content });
+      setContent("");
     } catch (error) {
       console.log(error);
     }
@@ -90,9 +91,16 @@ const PostPage: React.FC = () => {
           </Button>
         </FlexRow>
       </FlexColumn>
-      <FlexColumn>
+      <FlexColumn
+        style={{
+          border: `1px solid ${theme.border.tertiary}`,
+        }}
+      >
         {getCommentList.data?.map((comment) => (
-          <CommentComponent comment={comment} />
+          <CommentComponent
+            isAuthor={comment.user.id === getPost.data.user.id}
+            comment={comment}
+          />
         ))}
       </FlexColumn>
     </Container>

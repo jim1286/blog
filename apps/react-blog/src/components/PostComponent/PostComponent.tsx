@@ -32,7 +32,7 @@ const PostComponent: React.FC<Props> = ({ post }) => {
         <ContentWrap>
           <Title>{post.title}</Title>
           <Content>{post.content}</Content>
-          <PostText>{DateUtil.utcToLocalYYYYMMDD(post.createdAt)}</PostText>
+          <PostText>{DateUtil.utcToLocalYYYYMMDDHHmm(post.createdAt)}</PostText>
         </ContentWrap>
         <Footer>
           <UserProfile

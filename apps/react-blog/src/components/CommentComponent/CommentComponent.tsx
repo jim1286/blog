@@ -7,16 +7,19 @@ import {
   CommentTime,
   CommentActions,
   ActionButton,
+  AuthorTag,
 } from "./styles";
 import { CommentEntityResponse } from "@blog/types";
 import { DateUtil } from "@/utils";
-import { BM, H6 } from "@/theme";
+import { BLS, BM } from "@/theme";
+import { FlexRow } from "../BaseStyle";
 
 interface Props {
+  isAuthor: boolean;
   comment: CommentEntityResponse;
 }
 
-const CommentComponent: React.FC<Props> = ({ comment }) => {
+const CommentComponent: React.FC<Props> = ({ isAuthor, comment }) => {
   return (
     <Container>
       <AvatarImage
@@ -25,16 +28,23 @@ const CommentComponent: React.FC<Props> = ({ comment }) => {
       />
       <CommentContent>
         <CommentHeader>
-          <H6>{comment.user.userName}</H6>
+          <FlexRow gap={5} alignItems="center">
+            <BLS>{comment.user.userName}</BLS>
+            {isAuthor && <AuthorTag>작성자</AuthorTag>}
+          </FlexRow>
           <CommentTime>
-            {DateUtil.utcToLocalYYYYMMDD(comment.createdAt)}
+            {DateUtil.utcToLocalYYYYMMDDHHmm(comment.createdAt)}
           </CommentTime>
         </CommentHeader>
         <BM>{comment.content}</BM>
         <CommentActions>
-          <ActionButton>Reply</ActionButton>
-          <ActionButton>Edit</ActionButton>
-          <ActionButton>Delete</ActionButton>
+          <ActionButton>답글</ActionButton>
+          {isAuthor && (
+            <FlexRow gap={5}>
+              <ActionButton>수정</ActionButton>
+              <ActionButton>삭제</ActionButton>
+            </FlexRow>
+          )}
         </CommentActions>
       </CommentContent>
     </Container>

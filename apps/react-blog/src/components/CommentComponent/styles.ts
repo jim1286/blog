@@ -14,8 +14,8 @@ export const Container = styled.div`
 `;
 
 export const AvatarImage = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
 `;
 
@@ -31,17 +31,27 @@ export const CommentHeader = styled.div`
   justify-content: space-between;
 `;
 
+export const AuthorTag = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+  font-size: 9px;
+  border: 1px solid ${({ theme }) => theme.border.tertiary};
+  cursor: pointer;
+`;
+
 export const CommentTime = styled(BSS)`
   color: ${({ theme }) => theme.text.tertiary};
 `;
 
 export const CommentActions = styled.div`
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
 `;
 
 export const ActionButton = styled.button`
-  background-color: #007bff; /* 버튼 배경색 */
+  background-color: ${({ theme }) => theme.icon.tertiary};
   color: white; /* 버튼 텍스트 색상 */
   border: none; /* 테두리 제거 */
   border-radius: 4px; /* 모서리 둥글게 */
@@ -50,6 +60,6 @@ export const ActionButton = styled.button`
   transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
 
   &:hover {
-    background-color: #0056b3; /* 호버 시 배경색 변화 */
+    background-color: ${({ theme }) => theme.icon.secondary};
   }
 `;
