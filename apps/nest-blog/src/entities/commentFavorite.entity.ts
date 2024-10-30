@@ -9,13 +9,11 @@ export class CommentFavoriteEntity extends BaseEntity {
   user: UserEntity;
 
   @Column()
-  @Exclude()
   userId: string;
 
   @ManyToOne(() => CommentEntity, (comment) => comment.commentFavorites)
   comment: CommentEntity;
 
   @Column()
-  @Exclude()
   commentId: string;
 }

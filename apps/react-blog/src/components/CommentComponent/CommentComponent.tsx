@@ -13,6 +13,7 @@ import { CommentEntityResponse } from "@blog/types";
 import { DateUtil } from "@/utils";
 import { BLS, BM } from "@/theme";
 import { FlexRow } from "../BaseStyle";
+import { IconHeart } from "@tabler/icons-react";
 
 interface Props {
   isAuthor: boolean;
@@ -32,9 +33,12 @@ const CommentComponent: React.FC<Props> = ({ isAuthor, comment }) => {
             <BLS>{comment.user.userName}</BLS>
             {isAuthor && <AuthorTag>작성자</AuthorTag>}
           </FlexRow>
-          <CommentTime>
-            {DateUtil.utcToLocalYYYYMMDDHHmm(comment.createdAt)}
-          </CommentTime>
+          <FlexRow gap={5}>
+            <CommentTime>
+              {DateUtil.utcToLocalYYYYMMDDHHmm(comment.createdAt)}
+            </CommentTime>
+            <IconHeart size={15} />
+          </FlexRow>
         </CommentHeader>
         <BM>{comment.content}</BM>
         <CommentActions>

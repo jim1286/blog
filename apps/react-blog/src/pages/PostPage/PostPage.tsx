@@ -94,6 +94,7 @@ const PostPage: React.FC = () => {
           </Button>
         </FlexRow>
       </FlexColumn>
+      <H5>{getCommentList.data?.length}개의 댓글</H5>
       <FlexColumn
         style={{
           border: `1px solid ${theme.border.tertiary}`,
