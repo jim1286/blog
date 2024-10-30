@@ -19,7 +19,8 @@ export const usePostSignInMutation = () => {
 
   return useMutation({
     mutationFn: UserService.postSignIn,
-    onSuccess: () => {
+    onSuccess: (res) => {
+      TokenService.setToken(res);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USER] });
     },
   });

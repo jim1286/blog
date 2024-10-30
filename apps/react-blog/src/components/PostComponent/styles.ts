@@ -26,7 +26,9 @@ export const Container = styled.div`
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 4%) 0px 4px 16px 0px;
   background: ${({ theme }) => theme.bg.surface.tertiary};
-  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+  transition:
+    box-shadow 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
   cursor: pointer;
 
   &:hover {

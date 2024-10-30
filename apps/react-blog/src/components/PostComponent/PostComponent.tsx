@@ -22,7 +22,7 @@ interface Props {
 const PostComponent: React.FC<Props> = ({ post }) => {
   return (
     <Container>
-      <Thumbnail src={post.thumbNail} />
+      <Thumbnail src={post.thumbnailUrl} />
       <Body>
         <ContentWrap>
           <Title>{post.title}</Title>

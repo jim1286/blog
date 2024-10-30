@@ -5,7 +5,6 @@ import { BSS, H5 } from "@/theme";
 import { useLoginForm } from "./hook";
 import { InputForm } from "../InputForm";
 import { usePostSignInMutation } from "@/queries";
-import { TokenService } from "@/service";
 import { toast } from "react-toastify";
 import { useKeyDown } from "@/hooks";
 import { useTheme } from "styled-components";
@@ -48,8 +47,7 @@ const LoginModal: React.FC<Props> = ({
         password: loginInfo.password,
       };
 
-      const res = await postSignIn.mutateAsync(params);
-      TokenService.setToken(res);
+      await postSignIn.mutateAsync(params);
       toast.success("로그인 성공");
       onClose();
     } catch (error) {

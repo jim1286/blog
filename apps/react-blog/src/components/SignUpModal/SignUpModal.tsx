@@ -67,7 +67,7 @@ const SignUpModal: React.FC<Props> = ({ isOpen, onClose }) => {
     <Modal open={isOpen} footer={null} onCancel={handleCloseModal} centered>
       <FlexColumn>
         <H5 style={{ height: "50px" }}>회원가입</H5>
-        <FlexColumn width="100%">
+        <FlexColumn width="100%" gap={20}>
           <InputForm
             title="아이디"
             placeholder="아이디를 입력하세요"

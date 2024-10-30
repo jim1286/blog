@@ -37,6 +37,7 @@ export const CreatePostPage: React.FC = () => {
     const params = {
       ...createPostInfo,
       tags,
+      thumbnail: imageFile.current || undefined,
     };
 
     try {

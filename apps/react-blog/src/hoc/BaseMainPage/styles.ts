@@ -14,5 +14,5 @@ export const Tabs = styled(MediaBasePadding)`
   align-items: center;
   width: 100%;
   height: 80px;
-  gap: 20px;
+  gap: 15px;
 `;
