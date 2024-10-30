@@ -37,7 +37,11 @@ export const Container = styled.div`
   }
 `;
 
-export const Thumbnail = styled.img`
+interface ThumbnailMode {
+  thumbnailMode: boolean;
+}
+
+export const Thumbnail = styled.img<ThumbnailMode>`
   @media all and (min-width: ${MEDIA_SIZE.MIN_SIZE}px) {
     height: 200px;
   }
@@ -54,7 +58,7 @@ export const Thumbnail = styled.img`
   }
 
   width: 100%;
-  object-fit: fill;
+  object-fit: ${({ thumbnailMode }) => (thumbnailMode ? "fill" : "contain")};
 `;
 
 export const Body = styled.div`

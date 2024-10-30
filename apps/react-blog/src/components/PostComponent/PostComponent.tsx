@@ -14,6 +14,7 @@ import {
 import { DateUtil } from "@/utils";
 import { BSS } from "@/theme";
 import { PostEntityResponse } from "@blog/types";
+import NoImage from "../../../public/images/NoImage.png";
 
 interface Props {
   post: PostEntityResponse;
@@ -22,7 +23,10 @@ interface Props {
 const PostComponent: React.FC<Props> = ({ post }) => {
   return (
     <Container>
-      <Thumbnail src={post.thumbnailUrl} />
+      <Thumbnail
+        src={post.thumbnailUrl || NoImage}
+        thumbnailMode={!!post.thumbnailUrl}
+      />
       <Body>
         <ContentWrap>
           <Title>{post.title}</Title>
