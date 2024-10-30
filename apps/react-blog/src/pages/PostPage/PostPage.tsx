@@ -57,7 +57,6 @@ const PostPage: React.FC = () => {
       <MDEditor.Markdown
         style={{
           padding: 10,
-          minHeight: "50%",
           background: theme.bg.fill.primary.active,
           border: `1px solid ${theme.border.tertiary}`,
         }}
@@ -65,13 +64,12 @@ const PostPage: React.FC = () => {
       />
       <FlexRow
         width="100%"
-        height="60px"
         alignItems="center"
         gap={10}
-        style={{ overflowX: "auto" }}
+        style={{ overflowX: "auto", minHeight: "60px" }}
       >
-        {getPost.data.tags.map((ele) => (
-          <Tag key={ele.content} tagName={ele.content} />
+        {getPost.data.tags.map((ele, index) => (
+          <Tag key={index} tagName={ele.content} />
         ))}
       </FlexRow>
       <FlexColumn gap={10}>
@@ -96,8 +94,9 @@ const PostPage: React.FC = () => {
           border: `1px solid ${theme.border.tertiary}`,
         }}
       >
-        {getCommentList.data?.map((comment) => (
+        {getCommentList.data?.map((comment, index) => (
           <CommentComponent
+            key={index}
             isAuthor={comment.user.id === getPost.data.user.id}
             comment={comment}
           />
