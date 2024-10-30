@@ -14,7 +14,7 @@ import { CommentEntityResponse } from "@blog/types";
 import { DateUtil } from "@/utils";
 import { BLS, BM } from "@/theme";
 import { FlexRow } from "../BaseStyle";
-import { IconHeart } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { useGetUserQuery, useUpdateCommentFavoriteMutation } from "@/queries";
 
 interface Props {
@@ -28,6 +28,7 @@ const CommentComponent: React.FC<Props> = ({ isAuthor, comment }) => {
   const checkUserFavorite = comment.commentFavorites
     .map((ele) => ele.userId)
     .find((ele) => ele === getUser.data?.id);
+  const HeartIcon = checkUserFavorite ? IconHeartFilled : IconHeart;
 
   const handleClickFavorite = async () => {
     try {
@@ -56,11 +57,11 @@ const CommentComponent: React.FC<Props> = ({ isAuthor, comment }) => {
             <CommentTime>
               {DateUtil.utcToLocalYYYYMMDDHHmm(comment.createdAt)}
             </CommentTime>
-            <IconHeart
+            <HeartIcon
               size={15}
               cursor="pointer"
               onClick={handleClickFavorite}
-              fill={!!checkUserFavorite ? "red" : "white"}
+              fill={checkUserFavorite ? "red" : "white"}
             />
           </FlexRow>
         </CommentHeader>
