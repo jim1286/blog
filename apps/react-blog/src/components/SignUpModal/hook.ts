@@ -5,18 +5,19 @@ import { useEffect, useRef, useState } from "react";
 
 export const useSignUpForm = () => {
   const validate = useValidate();
-  const imageFile = useRef<File | null>(null);
   const changedKey = useRef<string>("");
   const postCheckUserName = usePostCheckUserNameMutation();
   const [signUpInfo, setSignUpInfo] = useState<SignUpFormInfoType>({
     userName: "",
     password: "",
     passwordConfirm: "",
+    imageFile: null,
   });
   const [signUpValidate, setSignUpValidate] = useState<SignUpFormValidateType>({
     userName: "null",
     password: "null",
     passwordConfirm: "null",
+    imageFile: "valid",
   });
   const disableSubmit = Object.values(signUpValidate).some(
     (validate) => validate !== "valid"
@@ -57,11 +58,11 @@ export const useSignUpForm = () => {
     setSignUpValidate(newFormValidate);
   }, [signUpInfo]);
 
-  const handleInputChange = (key: string, value: string) => {
+  const handleInputChange = (key: string, value: any) => {
     changedKey.current = key;
 
     if (key === "userName") {
-      checkUserNameDebounce(value);
+      checkUserNameDebounce(value as string);
     }
 
     setSignUpInfo({
@@ -75,17 +76,17 @@ export const useSignUpForm = () => {
       userName: "",
       password: "",
       passwordConfirm: "",
+      imageFile: null,
     });
     setSignUpValidate({
       userName: "null",
       password: "null",
       passwordConfirm: "null",
+      imageFile: "valid",
     });
-    imageFile.current = null;
   };
 
   return {
-    imageFile,
     signUpInfo,
     signUpValidate,
     disableSubmit,

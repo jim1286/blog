@@ -13,7 +13,6 @@ export const CreatePostPage: React.FC = () => {
   const {
     tag,
     tags,
-    imageFile,
     createPostInfo,
     disableSubmit,
     setTag,
@@ -34,10 +33,14 @@ export const CreatePostPage: React.FC = () => {
       return;
     }
 
+    const { title, subTitle, content } = createPostInfo;
+
     const params = {
-      ...createPostInfo,
+      title,
+      subTitle,
+      content,
       tags,
-      thumbnail: imageFile.current || undefined,
+      thumbnail: createPostInfo.imageFile || undefined,
     };
 
     try {
@@ -54,7 +57,13 @@ export const CreatePostPage: React.FC = () => {
     <Container>
       <FlexColumn gap={4}>
         <BMS>썸네일 등록</BMS>
-        <ImageUpload size={130} fileRef={imageFile} />
+        <ImageUpload
+          size={130}
+          currentImage={createPostInfo.imageFile}
+          onChangeImage={(imageFile) =>
+            handleInputChange("imageFile", imageFile)
+          }
+        />
       </FlexColumn>
       <InputForm
         title="제목"

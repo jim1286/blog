@@ -18,7 +18,6 @@ interface Props {
 
 const SignUpModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const {
-    imageFile,
     signUpInfo,
     signUpValidate,
     disableSubmit,
@@ -39,11 +38,13 @@ const SignUpModal: React.FC<Props> = ({ isOpen, onClose }) => {
       return;
     }
 
+    const { userName, password } = signUpInfo;
+
     try {
       const params = {
-        userName: signUpInfo.userName,
-        password: signUpInfo.password,
-        thumbnail: imageFile.current || undefined,
+        userName,
+        password,
+        thumbnail: signUpInfo.imageFile || undefined,
       };
 
       await postSignUp.mutateAsync(params);
@@ -117,7 +118,13 @@ const SignUpModal: React.FC<Props> = ({ isOpen, onClose }) => {
           />
           <FlexColumn gap={4}>
             <BMS>이미지 등록</BMS>
-            <ImageUpload size={130} fileRef={imageFile} />
+            <ImageUpload
+              size={130}
+              currentImage={signUpInfo.imageFile}
+              onChangeImage={(imageFile) =>
+                handleInputChange("imageFile", imageFile)
+              }
+            />
           </FlexColumn>
         </FlexColumn>
         <FlexRow width="100%">

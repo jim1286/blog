@@ -7,12 +7,14 @@ export interface SignUpFormInfoType {
   userName: string;
   password: string;
   passwordConfirm: string;
+  imageFile: File | null;
 }
 
 export interface CreatePostFormInfoType {
   title: string;
   subTitle: string;
   content: string;
+  imageFile: File | null;
 }
 
 export interface LoginFormValidateType {
@@ -24,12 +26,14 @@ export interface SignUpFormValidateType {
   userName: InputValidType;
   password: InputValidType;
   passwordConfirm: InputValidType;
+  imageFile: InputValidType;
 }
 
 export interface CreatePostFormValidateType {
   title: InputValidType;
   subTitle: InputValidType;
   content: InputValidType;
+  imageFile: InputValidType;
 }
 
 export interface UserFormInfoType {

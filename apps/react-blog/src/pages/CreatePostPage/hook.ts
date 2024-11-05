@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 
 export const useCreatePostForm = () => {
   const validate = useValidate();
-  const imageFile = useRef<File | null>(null);
   const changedKey = useRef<string>("");
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
@@ -15,12 +14,14 @@ export const useCreatePostForm = () => {
     title: "",
     subTitle: "",
     content: "",
+    imageFile: null,
   });
   const [createPostValidate, setCreatePostValidate] =
     useState<CreatePostFormValidateType>({
       title: "null",
       subTitle: "null",
       content: "null",
+      imageFile: "valid",
     });
   const disableSubmit = Object.values(createPostValidate).some(
     (validate) => validate !== "valid"
@@ -40,7 +41,7 @@ export const useCreatePostForm = () => {
     setCreatePostValidate(newFormValidate);
   }, [createPostInfo]);
 
-  const handleInputChange = (key: string, value: string) => {
+  const handleInputChange = (key: string, value: any) => {
     changedKey.current = key;
 
     setCreatePostInfo({
@@ -65,21 +66,25 @@ export const useCreatePostForm = () => {
   };
 
   const resetForm = () => {
-    setCreatePostInfo({ title: "", subTitle: "", content: "" });
+    setCreatePostInfo({
+      title: "",
+      subTitle: "",
+      content: "",
+      imageFile: null,
+    });
     setCreatePostValidate({
       title: "null",
       subTitle: "null",
       content: "null",
+      imageFile: "valid",
     });
     setTag("");
     setTags([]);
-    imageFile.current = null;
   };
 
   return {
     tag,
     tags,
-    imageFile,
     createPostInfo,
     disableSubmit,
     setTag,
@@ -96,9 +101,16 @@ const useValidate = () => {
   const validate = (
     key: keyof CreatePostFormInfoType,
     value: string,
-    newFormValidate: CreatePostFormInfoType
+    newFormValidate: CreatePostFormValidateType
   ) => {
-    newFormValidate[key] = checkNull(value);
+    switch (key) {
+      case "title":
+      case "subTitle":
+      case "content": {
+        newFormValidate[key] = checkNull(value);
+        break;
+      }
+    }
   };
 
   return validate;

@@ -1,6 +1,6 @@
 const useCheckInput = () => {
-  const checkNull = (str: string) => {
-    if (!str) {
+  const checkNull = (str: any) => {
+    if (str === null || str === undefined || !str) {
       return "null";
     }
 

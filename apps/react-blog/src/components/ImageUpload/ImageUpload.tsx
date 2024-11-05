@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Container,
   HiddenInput,
@@ -9,34 +8,35 @@ import {
 import { IconX } from "@tabler/icons-react";
 import { BSS } from "@/theme";
 import { useTheme } from "styled-components";
+import { useMemo } from "react";
 
 interface Props {
   size?: number;
-  fileRef: React.MutableRefObject<File | null>;
+  currentImage: File | null;
+  onChangeImage: (imageFile: File | null) => void;
 }
 
-const ImageUpload: React.FC<Props> = ({ size = 100, fileRef }) => {
+const ImageUpload: React.FC<Props> = ({
+  size = 100,
+  currentImage,
+  onChangeImage,
+}) => {
   const theme = useTheme();
-  const [previewUrl, setPreviewUrl] = useState<string>("");
+  const previewUrl = useMemo(() => {
+    return currentImage ? URL.createObjectURL(currentImage) : undefined;
+  }, [currentImage]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
     if (file) {
-      fileRef.current = file;
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
+      onChangeImage(file);
     }
   };
 
   const handleUploadClick = () => {
     const fileInput = document.getElementById("file-input") as HTMLInputElement;
     fileInput.click();
-  };
-
-  const handleReset = () => {
-    setPreviewUrl("");
-    fileRef.current = null;
   };
 
   return (
@@ -52,7 +52,7 @@ const ImageUpload: React.FC<Props> = ({ size = 100, fileRef }) => {
           <>
             <ImagePreview src={previewUrl} alt="Preview" />
             <IconX
-              onClick={handleReset}
+              onClick={() => onChangeImage(null)}
               size={15}
               style={{
                 position: "absolute",
