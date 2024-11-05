@@ -12,3 +12,7 @@ export interface CreateCommentReplyRequest {
 export interface GetCommentListRequest {
   postId: string;
 }
+
+export interface DeleteCommentRequest {
+  commentId: string;
+}

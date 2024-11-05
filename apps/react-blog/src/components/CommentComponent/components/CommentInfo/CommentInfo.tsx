@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import {
   useCreateCommentReplyMutation,
+  useDeleteCommentMutation,
   useGetPostQuery,
   useGetUserQuery,
 } from "@/queries";
@@ -35,6 +36,7 @@ const CommentInfo: React.FC<Props> = ({
 }) => {
   const getUser = useGetUserQuery();
   const getPost = useGetPostQuery(postId);
+  const deleteComment = useDeleteCommentMutation();
   const createCommentReply = useCreateCommentReplyMutation();
   const checkUserFavorite = !!comment.commentFavorites
     .map((ele) => ele.userId)
@@ -56,6 +58,14 @@ const CommentInfo: React.FC<Props> = ({
     try {
       await createCommentReply.mutateAsync(params);
       closeChildrenComment();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteComment = async () => {
+    try {
+      await deleteComment.mutateAsync({ commentId: comment.id });
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +96,9 @@ const CommentInfo: React.FC<Props> = ({
               {getUser.data?.id === comment.user.id && (
                 <FlexRow gap={5}>
                   <ActionButton>수정</ActionButton>
-                  <ActionButton>삭제</ActionButton>
+                  <ActionButton onClick={handleDeleteComment}>
+                    삭제
+                  </ActionButton>
                 </FlexRow>
               )}
             </FlexRow>

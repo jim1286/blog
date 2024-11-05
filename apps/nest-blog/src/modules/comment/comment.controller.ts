@@ -53,10 +53,9 @@ export class CommentController {
   @UseGuards(JwtAuthGuard)
   async deleteComment(
     @GetUser('id') userId: string,
-    @Query('postId') postId: string,
     @Query('commentId') commentId: string,
   ): Promise<MessageResponse> {
-    return await this.commentService.deleteComment(userId, postId, commentId);
+    return await this.commentService.deleteComment(userId, commentId);
   }
 
   @Delete('/reply')

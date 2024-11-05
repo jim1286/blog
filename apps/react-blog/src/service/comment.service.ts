@@ -1,6 +1,7 @@
 import {
   CreateCommentReplyRequest,
   CreateCommentRequest,
+  DeleteCommentRequest,
   GetCommentListRequest,
   GetCommentListResponse,
   MessageResponse,
@@ -14,6 +15,15 @@ export const createComment = async (
 ): Promise<MessageResponse> => {
   const uri = `${COMMENT_URI}/create`;
   const res = await axiosInstance.post(uri, params);
+
+  return res.data;
+};
+
+export const deleteComment = async (
+  params: DeleteCommentRequest
+): Promise<MessageResponse> => {
+  const uri = `${COMMENT_URI}`;
+  const res = await axiosInstance.delete(uri, { params });
 
   return res.data;
 };

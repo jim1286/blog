@@ -86,14 +86,10 @@ export class CommentService {
 
   async deleteComment(
     userId: string,
-    postId: string,
     commentId: string,
   ): Promise<MessageResponse> {
     const comment =
-      await this.commentRepository.getCommentWithReplyByCommentIdAndPostId(
-        postId,
-        commentId,
-      );
+      await this.commentRepository.getCommentByCommentId(commentId);
 
     if (userId !== comment.userId) {
       throw new UnauthorizedException('작성자만 댓글을 삭제할 수 있습니다.');

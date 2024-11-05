@@ -45,7 +45,6 @@ export class CommentRepository extends Repository<CommentEntity> {
       this.createQueryBuilder('comment');
 
     return await queryBuilder
-      .leftJoinAndSelect('comment.children', 'children')
       .where('comment.id = :commentId', { commentId })
       .andWhere('comment.postId = :postId', { postId })
       .getOne();

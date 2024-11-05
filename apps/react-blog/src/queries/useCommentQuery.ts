@@ -13,6 +13,17 @@ export const useCreateCommentMutation = () => {
   });
 };
 
+export const useDeleteCommentMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: CommentService.deleteComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COMMENT_LIST] });
+    },
+  });
+};
+
 export const useCreateCommentReplyMutation = () => {
   const queryClient = useQueryClient();
 
