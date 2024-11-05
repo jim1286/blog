@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Tab } from "./components";
+import { Tab } from "./components";
 import { Outlet } from "react-router-dom";
 import { IconHome, IconPlus, IconTimeline } from "@tabler/icons-react";
 import { Container, Tabs } from "./styles";
@@ -25,7 +25,6 @@ const tabs = [
 const BaseMainPage: React.FC = () => {
   return (
     <Container>
-      <Header />
       <Tabs>
         {tabs.map((tab) => (
           <Tab

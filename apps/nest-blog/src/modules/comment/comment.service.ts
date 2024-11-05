@@ -81,9 +81,7 @@ export class CommentService {
   async getCommentListByPostId(
     postId: string,
   ): Promise<CommentEntityResponse[]> {
-    return (
-      await this.commentRepository.getCommentListWithReplyByPostId(postId)
-    ).filter((comment) => !comment.parentId);
+    return await this.commentRepository.getCommentListWithReplyByPostId(postId);
   }
 
   async deleteComment(

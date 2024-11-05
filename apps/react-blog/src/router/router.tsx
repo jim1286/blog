@@ -21,10 +21,6 @@ const router = createBrowserRouter([
             element: <RecentPage />,
           },
           {
-            path: "post/:postId",
-            element: <PostPage />,
-          },
-          {
             path: "my",
             element: <PrivateRoute />,
             children: [
@@ -43,6 +39,10 @@ const router = createBrowserRouter([
             ],
           },
         ],
+      },
+      {
+        path: "post/:postId",
+        element: <PostPage />,
       },
     ],
   },

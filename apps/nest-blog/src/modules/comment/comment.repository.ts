@@ -15,9 +15,16 @@ export class CommentRepository extends Repository<CommentEntity> {
     return await queryBuilder
       .leftJoinAndSelect('comment.user', 'user')
       .leftJoinAndSelect('comment.children', 'children')
+      .leftJoinAndSelect('children.user', 'childrenUser')
+      .leftJoinAndSelect(
+        'children.commentFavorites',
+        'childrenCommentFavorites',
+      )
       .leftJoinAndSelect('comment.commentFavorites', 'commentFavorites')
       .where('comment.postId = :postId', { postId })
+      .andWhere('comment.parentId IS NULL')
       .orderBy('comment.createdAt', 'DESC')
+      .orderBy('children.createdAt', 'DESC')
       .getMany();
   }
 

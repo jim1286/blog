@@ -5,8 +5,10 @@ import { useState } from "react";
 import { Container } from "./styles";
 import { useGetUserQuery } from "@/queries";
 import { Popover } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const getUser = useGetUserQuery();
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
@@ -15,7 +17,14 @@ const Header = () => {
   return (
     <Container>
       <FlexRow justifyContent="space-between" alignItems="center">
-        <H3 style={{ cursor: "pointer" }}>Plog</H3>
+        <H3
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Plog
+        </H3>
         {getUser.data ? (
           <Popover content={<BSS>로그아웃</BSS>}>
             <IconKeyOff

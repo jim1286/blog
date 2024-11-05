@@ -5,6 +5,7 @@ import { Container } from "./styles";
 import { ToastContainer } from "react-toastify";
 import { NotificationIcon } from "@/components";
 import "react-toastify/dist/ReactToastify.css";
+import { Header } from "./components";
 
 function App() {
   const colorMode: DefaultTheme = CustomTheme.light;
@@ -19,6 +20,7 @@ function App() {
           style={{ width: "410px" }}
           stacked
         />
+        <Header />
         <Outlet />
       </Container>
     </ThemeProvider>

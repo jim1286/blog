@@ -45,7 +45,7 @@ const PostPage: React.FC = () => {
     }
   };
 
-  if (!getPost.data) {
+  if (!getPost.data || !postId) {
     return null;
   }
 
@@ -94,20 +94,18 @@ const PostPage: React.FC = () => {
           </Button>
         </FlexRow>
       </FlexColumn>
-      <H5>{getCommentList.data?.length}개의 댓글</H5>
-      <FlexColumn
-        style={{
-          border: `1px solid ${theme.border.tertiary}`,
-        }}
-      >
-        {getCommentList.data?.map((comment, index) => (
-          <CommentComponent
-            key={index}
-            isAuthor={comment.user.id === getPost.data.user.id}
-            comment={comment}
-            postId={postId}
-          />
-        ))}
+      <FlexColumn width="100%" gap={10}>
+        <H5>{getCommentList.data?.length}개의 댓글</H5>
+        <FlexColumn
+          width="100%"
+          style={{
+            border: `1px solid ${theme.border.tertiary}`,
+          }}
+        >
+          {getCommentList.data?.map((comment, index) => (
+            <CommentComponent key={index} comment={comment} postId={postId} />
+          ))}
+        </FlexColumn>
       </FlexColumn>
     </Container>
   );
