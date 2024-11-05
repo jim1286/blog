@@ -59,14 +59,4 @@ export class CommentRepository extends Repository<CommentEntity> {
       .where('comment.id = :commentId', { commentId })
       .execute();
   }
-
-  async deleteReplyByReplyId(replyId: string) {
-    const queryBuilder: SelectQueryBuilder<CommentEntity> =
-      this.createQueryBuilder('comment');
-
-    return await queryBuilder
-      .softDelete()
-      .where('comment.id = :replyId', { replyId })
-      .execute();
-  }
 }

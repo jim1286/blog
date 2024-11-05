@@ -102,34 +102,4 @@ export class CommentService {
       throw new NotFoundException('댓글 삭제 실패');
     }
   }
-
-  async deleteReply(
-    userId: string,
-    postId: string,
-    commentId: string,
-    replyId: string,
-  ): Promise<MessageResponse> {
-    const comment =
-      await this.commentRepository.getCommentWithReplyByCommentIdAndPostId(
-        postId,
-        commentId,
-      );
-
-    const findReply = comment.children.find((reply) => reply.id === replyId);
-
-    if (!findReply) {
-      throw new NotFoundException('대댓글이 존재하지 않습니다.');
-    }
-
-    if (userId !== findReply.userId) {
-      throw new UnauthorizedException('작성자만 대댓글을 삭제할 수 있습니다.');
-    }
-
-    try {
-      await this.commentRepository.deleteReplyByReplyId(replyId);
-      return { message: '대댓글 삭제 완료' };
-    } catch (error) {
-      throw new NotFoundException('대댓글 삭제 실패');
-    }
-  }
 }
