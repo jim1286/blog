@@ -10,4 +10,6 @@ export interface CreatePostRequest {
   thumbnail?: File;
 }
 
+export type DeletePostRequest = GetPostRequest;
+
 export type UpdatePostRequest = CreatePostRequest;

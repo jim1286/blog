@@ -1,5 +1,6 @@
 import {
   CreatePostRequest,
+  DeletePostRequest,
   GetPostListAllResponse,
   GetPostListResponse,
   GetPostRequest,
@@ -15,6 +16,15 @@ export const getPost = async (
 ): Promise<GetPostResponse> => {
   const uri = `${POST_URI}`;
   const res = await axiosInstance.get(uri, { params });
+
+  return res.data;
+};
+
+export const deletePost = async (
+  params: DeletePostRequest
+): Promise<GetPostResponse> => {
+  const uri = `${POST_URI}`;
+  const res = await axiosInstance.delete(uri, { params });
 
   return res.data;
 };

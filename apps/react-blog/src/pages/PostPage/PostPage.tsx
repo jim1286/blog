@@ -7,11 +7,12 @@ import {
 } from "@/queries";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container } from "./styles";
+import { ActionButton, Container } from "./styles";
 import MDEditor from "@uiw/react-md-editor";
 import { BM, H4, H5 } from "@/theme";
 import {
   CommentComponent,
+  DeletePostModal,
   FavoriteComponent,
   FlexColumn,
   FlexRow,
@@ -32,6 +33,7 @@ const PostPage: React.FC = () => {
   const createComment = useCreateCommentMutation();
   const updatePostFavorite = useUpdatePostFavoriteMutation();
   const [content, setContent] = useState("");
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   useKeyDown(() => {
     handleSubmitComment();
@@ -66,16 +68,14 @@ const PostPage: React.FC = () => {
     <Container>
       <FlexRow alignItems="center" justifyContent="space-between">
         <H4>{getPost.data.title}</H4>
-        <FavoriteComponent
-          clickedTargetId={postId}
-          favoriteLength={getPost.data.postFavorites.length}
-          checkUserFavorite={
-            !!getPost.data.postFavorites.find(
-              (postFavorite) => postFavorite.userId === getUser.data?.id
-            )
-          }
-          onClickFavorite={onClickFavorite}
-        />
+        {getUser.data?.id === getPost.data.user.id && (
+          <FlexRow gap={5}>
+            <ActionButton>수정</ActionButton>
+            <ActionButton onClick={() => setOpenDeleteModal(true)}>
+              삭제
+            </ActionButton>
+          </FlexRow>
+        )}
       </FlexRow>
       <BM>{getPost.data.subTitle}</BM>
       <FlexRow justifyContent="flex-end">
@@ -120,7 +120,19 @@ const PostPage: React.FC = () => {
         </FlexRow>
       </FlexColumn>
       <FlexColumn width="100%" gap={10}>
-        <H5>{getCommentList.data?.length}개의 댓글</H5>
+        <FlexRow alignItems="center" gap={10}>
+          <H5>{getCommentList.data?.length}개의 댓글</H5>
+          <FavoriteComponent
+            clickedTargetId={postId}
+            favoriteLength={getPost.data.postFavorites.length}
+            checkUserFavorite={
+              !!getPost.data.postFavorites.find(
+                (postFavorite) => postFavorite.userId === getUser.data?.id
+              )
+            }
+            onClickFavorite={onClickFavorite}
+          />
+        </FlexRow>
         <FlexColumn
           width="100%"
           style={{
@@ -132,6 +144,11 @@ const PostPage: React.FC = () => {
           ))}
         </FlexColumn>
       </FlexColumn>
+      <DeletePostModal
+        postId={postId}
+        isOpen={openDeleteModal}
+        onClose={() => setOpenDeleteModal(false)}
+      />
     </Container>
   );
 };

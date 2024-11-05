@@ -74,10 +74,10 @@ export class PostController {
   @Delete('/')
   @UseGuards(JwtAuthGuard)
   async deletePost(
-    @Query('postId') postId: string,
     @GetUser('id') userId: string,
+    @Query('postId') postId: string,
   ): Promise<MessageResponse> {
-    return await this.postService.deletePostByPostId(postId, userId);
+    return await this.postService.deletePostByPostId(userId, postId);
   }
 
   @Put('/')

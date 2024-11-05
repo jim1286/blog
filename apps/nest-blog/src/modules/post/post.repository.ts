@@ -47,8 +47,8 @@ export class PostRepository extends Repository<PostEntity> {
       this.createQueryBuilder('post');
 
     return await queryBuilder
-      .where('post.userId = :userId', { userId })
       .leftJoinAndSelect('post.user', 'user')
+      .where('post.user.id = :userId', { userId })
       .leftJoinAndSelect('post.postFavorites', 'postFavorites')
       .orderBy('post.createdAt', 'DESC')
       .getMany();

@@ -1,5 +1,5 @@
 import { QUERY_KEYS } from "@/constants";
-import { CommentService, PostService } from "@/service";
+import { PostService } from "@/service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useGetUserQuery } from "./useUserQuery";
 
@@ -8,6 +8,18 @@ export const useGetPostQuery = (postId?: string) => {
     queryKey: [QUERY_KEYS.POST, postId],
     enabled: !!postId,
     queryFn: () => PostService.getPost({ postId: postId! }),
+  });
+};
+
+export const useDeletePostMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: PostService.deletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POST_LIST] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.POST_LIST_ALL] });
+    },
   });
 };
 

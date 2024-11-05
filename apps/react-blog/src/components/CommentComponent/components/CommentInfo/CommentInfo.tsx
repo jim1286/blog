@@ -82,7 +82,7 @@ const CommentInfo: React.FC<Props> = ({
                 <AuthorTag>작성자</AuthorTag>
               )}
             </FlexRow>
-            <FlexRow gap={5}>
+            <FlexRow>
               {getUser.data?.id === comment.user.id && (
                 <FlexRow gap={5}>
                   <ActionButton>수정</ActionButton>

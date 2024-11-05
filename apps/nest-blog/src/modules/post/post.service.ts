@@ -77,8 +77,8 @@ export class PostService {
   }
 
   async deletePostByPostId(
-    postId: string,
     userId: string,
+    postId: string,
   ): Promise<MessageResponse> {
     const postList = await this.postRepository.getPostListByUserId(userId);
 
