@@ -47,19 +47,19 @@ export class PostService {
     }
 
     try {
-      const savedPost = await this.postRepository.save(newPost);
-
       if (tags) {
         // tag를 시간 순으로 저장하기 위해
         // promise all 사용하지 않음
         const newTags = tags.map((tag) =>
           this.tagRepository.create({
-            post: savedPost,
+            post: newPost,
             content: tag,
           }),
         );
         await this.tagRepository.save(newTags);
       }
+
+      await this.postRepository.save(newPost);
       return { message: '생성 완료' };
     } catch (error) {
       throw new Error('생성 실패');
