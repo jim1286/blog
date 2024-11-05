@@ -2,6 +2,8 @@ import {
   useCreateCommentMutation,
   useGetCommentListQuery,
   useGetPostQuery,
+  useGetUserQuery,
+  useUpdatePostFavoriteMutation,
 } from "@/queries";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -10,6 +12,7 @@ import MDEditor from "@uiw/react-md-editor";
 import { BM, H4, H5 } from "@/theme";
 import {
   CommentComponent,
+  FavoriteComponent,
   FlexColumn,
   FlexRow,
   Input,
@@ -23,9 +26,11 @@ import { useKeyDown } from "@/hooks";
 const PostPage: React.FC = () => {
   const theme = useTheme();
   const { postId } = useParams();
+  const getUser = useGetUserQuery();
   const getPost = useGetPostQuery(postId);
   const getCommentList = useGetCommentListQuery(postId);
   const createComment = useCreateCommentMutation();
+  const updatePostFavorite = useUpdatePostFavoriteMutation();
   const [content, setContent] = useState("");
 
   useKeyDown(() => {
@@ -45,13 +50,33 @@ const PostPage: React.FC = () => {
     }
   };
 
+  const onClickFavorite = async (postId: string) => {
+    try {
+      await updatePostFavorite.mutateAsync({ postId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!getPost.data || !postId) {
     return null;
   }
 
   return (
     <Container>
-      <H4>{getPost.data.title}</H4>
+      <FlexRow alignItems="center" justifyContent="space-between">
+        <H4>{getPost.data.title}</H4>
+        <FavoriteComponent
+          clickedTargetId={postId}
+          favoriteLength={getPost.data.postFavorites.length}
+          checkUserFavorite={
+            !!getPost.data.postFavorites.find(
+              (postFavorite) => postFavorite.userId === getUser.data?.id
+            )
+          }
+          onClickFavorite={onClickFavorite}
+        />
+      </FlexRow>
       <BM>{getPost.data.subTitle}</BM>
       <FlexRow justifyContent="flex-end">
         <UserProfile

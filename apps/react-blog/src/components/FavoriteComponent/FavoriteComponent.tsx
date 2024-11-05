@@ -3,14 +3,14 @@ import React from "react";
 import { Container } from "./styles";
 
 interface Props {
-  commentId: string;
+  clickedTargetId: string;
   favoriteLength: number;
   checkUserFavorite: boolean;
-  onClickFavorite: (commentId: string) => void;
+  onClickFavorite?: (clickedTargetId: string) => void;
 }
 
 const FavoriteComponent: React.FC<Props> = ({
-  commentId,
+  clickedTargetId,
   favoriteLength = 0,
   checkUserFavorite,
   onClickFavorite,
@@ -18,7 +18,12 @@ const FavoriteComponent: React.FC<Props> = ({
   const HeartIcon = checkUserFavorite ? IconHeartFilled : IconHeart;
 
   return (
-    <Container onClick={() => onClickFavorite(commentId)}>
+    <Container
+      onClick={(e) => {
+        e.stopPropagation();
+        onClickFavorite?.(clickedTargetId);
+      }}
+    >
       <HeartIcon size={15} fill={checkUserFavorite ? "red" : "white"} />
       {favoriteLength}
     </Container>

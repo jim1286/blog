@@ -1,9 +1,21 @@
 import { JwtAuthGuard } from '@/guards';
-import { Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
 import { PostFavoriteService } from './post-favorite.service';
 import { GetUser } from '@/decorators';
 import { ApiTags } from '@nestjs/swagger';
-import { MessageResponse, PostFavoriteEntityResponse } from '@blog/types';
+import {
+  MessageResponse,
+  PostFavoriteEntityResponse,
+  UpdatePostFavoriteRequest,
+} from '@blog/types';
 
 @ApiTags('post-favorite')
 @Controller('post-favorite')
@@ -14,9 +26,9 @@ export class PostFavoriteController {
   @Post('/')
   async updateFavorite(
     @GetUser('id') userId: string,
-    @Query('postId') postId: string,
+    @Body(ValidationPipe) body: UpdatePostFavoriteRequest,
   ): Promise<MessageResponse> {
-    return await this.postFavoriteService.updateFavorite(userId, postId);
+    return await this.postFavoriteService.updateFavorite(userId, body);
   }
 
   @Get('/')

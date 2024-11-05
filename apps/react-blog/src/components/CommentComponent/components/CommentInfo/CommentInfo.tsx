@@ -16,10 +16,9 @@ import {
   useGetUserQuery,
 } from "@/queries";
 import { useState } from "react";
-import { Input } from "@/components";
+import { Input, FavoriteComponent } from "@/components";
 import { Button } from "antd";
 import { CommentEntityResponse } from "@blog/types";
-import { FavoriteComponent } from "./components";
 
 interface Props {
   type: "parent" | "children";
@@ -102,7 +101,7 @@ const CommentInfo: React.FC<Props> = ({
               </CommentTime>
               {type === "children" && (
                 <FavoriteComponent
-                  commentId={comment.id}
+                  clickedTargetId={comment.id}
                   favoriteLength={comment.commentFavorites.length}
                   checkUserFavorite={checkUserFavorite}
                   onClickFavorite={onClickFavorite}
@@ -116,7 +115,7 @@ const CommentInfo: React.FC<Props> = ({
                 답글
               </ActionButton>
               <FavoriteComponent
-                commentId={comment.id}
+                clickedTargetId={comment.id}
                 favoriteLength={comment.commentFavorites.length}
                 checkUserFavorite={checkUserFavorite}
                 onClickFavorite={onClickFavorite}

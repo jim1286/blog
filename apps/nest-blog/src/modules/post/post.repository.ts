@@ -15,6 +15,7 @@ export class PostRepository extends Repository<PostEntity> {
 
     return await queryBuilder
       .leftJoinAndSelect('post.user', 'user')
+      .leftJoinAndSelect('post.postFavorites', 'postFavorites')
       .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
@@ -26,7 +27,8 @@ export class PostRepository extends Repository<PostEntity> {
     return await queryBuilder
       .where('post.id = :postId', { postId })
       .leftJoinAndSelect('post.user', 'user')
-      .leftJoinAndSelect('post.tags', 'tag')
+      .leftJoinAndSelect('post.tags', 'tags')
+      .leftJoinAndSelect('post.postFavorites', 'postFavorites')
       .getOne();
   }
 
@@ -47,6 +49,8 @@ export class PostRepository extends Repository<PostEntity> {
     return await queryBuilder
       .where('post.userId = :userId', { userId })
       .leftJoinAndSelect('post.user', 'user')
+      .leftJoinAndSelect('post.postFavorites', 'postFavorites')
+      .orderBy('post.createdAt', 'DESC')
       .getMany();
   }
 

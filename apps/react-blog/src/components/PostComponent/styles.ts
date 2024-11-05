@@ -82,6 +82,7 @@ export const Footer = styled.div`
   display: flex;
   padding: 10px 15px;
   align-items: center;
+  justify-content: space-between;
   gap: 15px;
 `;
 

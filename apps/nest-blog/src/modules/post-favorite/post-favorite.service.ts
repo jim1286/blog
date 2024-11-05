@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { PostFavoriteRepository } from './post-favorite.repository';
 import { UserService } from '../user/user.service';
 import { PostService } from '../post/post.service';
-import { MessageResponse, PostFavoriteEntityResponse } from '@blog/types';
+import {
+  MessageResponse,
+  PostFavoriteEntityResponse,
+  UpdatePostFavoriteRequest,
+} from '@blog/types';
 
 @Injectable()
 export class PostFavoriteService {
@@ -14,8 +18,9 @@ export class PostFavoriteService {
 
   async updateFavorite(
     userId: string,
-    postId: string,
+    body: UpdatePostFavoriteRequest,
   ): Promise<MessageResponse> {
+    const { postId } = body;
     const favorite = await this.postFavoriteRepository.getByUserIdAndPostId(
       userId,
       postId,

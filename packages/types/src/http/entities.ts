@@ -30,6 +30,7 @@ export interface PostEntityResponse extends BaseEntityResponse {
   content: string;
   thumbnailUrl?: string;
   user: UserEntityResponse;
+  postFavorites: PostFavoriteEntityResponse[];
   tags: TagEntityResponse[];
 }
 

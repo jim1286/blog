@@ -13,7 +13,8 @@ import { DateUtil } from "@/utils";
 import { PostEntityResponse } from "@blog/types";
 import NoImage from "../../../public/images/NoImage.png";
 import { useNavigate } from "react-router-dom";
-import { UserProfile } from "..";
+import { FavoriteComponent, UserProfile } from "..";
+import { useGetUserQuery } from "@/queries";
 
 interface Props {
   post: PostEntityResponse;
@@ -21,6 +22,7 @@ interface Props {
 
 const PostComponent: React.FC<Props> = ({ post }) => {
   const navigate = useNavigate();
+  const getUser = useGetUserQuery();
 
   return (
     <Container onClick={() => navigate(`/post/${post.id}`)}>
@@ -38,6 +40,15 @@ const PostComponent: React.FC<Props> = ({ post }) => {
           <UserProfile
             thumbnailUrl={post.user.thumbnailUrl}
             userName={post.user.userName}
+          />
+          <FavoriteComponent
+            clickedTargetId={post.id}
+            favoriteLength={post.postFavorites.length}
+            checkUserFavorite={
+              !!post.postFavorites.find(
+                (postFavorite) => postFavorite.userId === getUser.data?.id
+              )
+            }
           />
         </Footer>
       </Body>

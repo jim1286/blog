@@ -24,7 +24,7 @@ export class CommentRepository extends Repository<CommentEntity> {
       .where('comment.postId = :postId', { postId })
       .andWhere('comment.parentId IS NULL')
       .orderBy('comment.createdAt', 'DESC')
-      .orderBy('children.createdAt', 'DESC')
+      .addOrderBy('children.createdAt', 'DESC')
       .getMany();
   }
 
