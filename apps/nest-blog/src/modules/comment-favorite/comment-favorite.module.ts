@@ -9,5 +9,6 @@ import { CommentModule } from '../comment/comment.module';
   imports: [UserModule, CommentModule],
   controllers: [CommentFavoriteController],
   providers: [CommentFavoriteService, CommentFavoriteRepository],
+  exports: [CommentFavoriteService, CommentFavoriteRepository],
 })
 export class CommentFavoriteModule {}

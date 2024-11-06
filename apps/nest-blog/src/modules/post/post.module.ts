@@ -14,6 +14,6 @@ import { TagRepository } from '../tag/tag.repository';
     TagRepository,
     Logger,
   ],
-  exports: [PostService],
+  exports: [PostService, PostRepository],
 })
 export class PostModule {}

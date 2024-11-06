@@ -26,7 +26,7 @@ import { JwtStrategy } from '@/strategies';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService, UserRepository, JwtStrategy, Logger],
-  exports: [UserService],
+  providers: [UserService, UserRepository, JwtStrategy],
+  exports: [UserService, UserRepository],
 })
 export class UserModule {}

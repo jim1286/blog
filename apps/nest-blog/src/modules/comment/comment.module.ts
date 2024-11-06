@@ -9,6 +9,6 @@ import { UserModule } from '../user/user.module';
   imports: [PostModule, UserModule],
   controllers: [CommentController],
   providers: [CommentService, CommentRepository],
-  exports: [CommentService],
+  exports: [CommentService, CommentRepository],
 })
 export class CommentModule {}

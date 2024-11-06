@@ -7,7 +7,8 @@ import { PostModule } from '../post/post.module';
 
 @Module({
   imports: [UserModule, PostModule],
-  providers: [PostFavoriteService, PostFavoriteRepository],
   controllers: [PostFavoriteController],
+  providers: [PostFavoriteService, PostFavoriteRepository],
+  exports: [PostFavoriteService, PostFavoriteRepository],
 })
 export class PostFavoriteModule {}
